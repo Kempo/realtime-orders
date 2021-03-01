@@ -13,7 +13,7 @@ Stack: Next.js, Typescript, Apollo Client
 ## Server
 Stack: Node.js, Typescript, Apollo Server (GraphQL), Sqlite3, Prisma, Express
 
-### Version 0 (Skateboard)
+## Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payment.
 
 - [x] DB Seeding
@@ -28,46 +28,46 @@ Accept and view orders from the restaurant site and receive payment.
   - [x] Cascading Deletes testing
 - [x] `title` field for order (and migration)
 - [x] `createOrder` mutation
-- [] Stripe `/checkout` endpoint
+- [ ] Stripe `/checkout` endpoint
 - **Frontends**
-  - [] Orders Dashboard
+  - [ ] Orders Dashboard
     - [x] Apollo Client
     - [x] HTTP Polling
     - [x] OrdersList Component
-  - [] Checkout flow (customer-facing)
-    - [] Stripe Checkout
-    - [] 3 - 5 most popular menu items
-    - [] Pictures Included
-    - [] 1 pager
-- [] Heroku Deployment (server)
-- [] Netlify (frontends)
+  - [ ] Checkout flow (customer-facing)
+    - [ ] Stripe Checkout
+    - [ ] 3 - 5 most popular menu items
+    - [ ] Pictures Included
+    - [ ] 1 pager
+- [ ] Heroku Deployment (server)
+- [ ] Netlify (frontends)
 
-### Version 1 (Bicycle)
+## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
-- [] Timestamped orders
-- [] Filtering by status, time, and order titles
-- [] `updateOrder` mutation
-  - [] Enum for order status: `READY`, `WAITING`, `FINISHED`
+- [ ] Timestamped orders
+- [ ] Filtering by status, time, and order titles
+- [ ] `updateOrder` mutation
+  - [ ] Enum for order status: `READY`, `WAITING`, `FINISHED`
 - **Frontends**
-  - [] Orders Dashboard
-     - [] Sidebar interface and main view
-     - [] Update Order status
-  - [] Checkout flow (customer-facing)
-    - [] Include all menu items
-    - [] 5 - 10 pictures included
-    - [] Basic SSG / SSR 
+  - [ ] Orders Dashboard
+     - [ ] Sidebar interface and main view
+     - [ ] Update Order status
+  - [ ] Checkout flow (customer-facing)
+    - [ ] Include all menu items
+    - [ ] 5 - 10 pictures included
+    - [ ] Basic SSG / SSR 
 
-### Version 2 (Car)
+## Version 2 (Car)
 End-of-day transaction summary, dev and production environments, speedy and efficient data fetching, service observability
 
-- [] Pricing for Menu Items Migration
-- [] Idempotency
-- [] Websockets Integration
-- [] UUID schema migration
-- [] Production / Dev environments
-- [] End-of-day Transactional Summary (email)
-- [] Migrate schema/DB from integer IDs to hashes
+- [ ] Pricing for Menu Items Migration
+- [ ] Idempotency
+- [ ] Websockets Integration
+- [ ] UUID schema migration
+- [ ] Production / Dev environments
+- [ ] End-of-day Transactional Summary (email)
+- [ ] Migrate schema/DB from integer IDs to hashes
 
 And beyond...
 
