@@ -13,9 +13,7 @@ Stack: Next.js, Typescript, Apollo Client
 ## Server
 Stack: Node.js, Typescript, Apollo Server (GraphQL), Sqlite3, Prisma, Express
 
-## Action Items
-
-# Version 0 (Skateboard)
+### Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payment.
 
 - [x] DB Seeding
