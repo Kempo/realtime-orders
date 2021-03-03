@@ -15,6 +15,7 @@ Stack: Node.js, Typescript, Apollo Server (GraphQL), Sqlite3, Prisma, Express
 
 ## Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payment.
+Allow customers to buy online from the top 5 most popular menu items.
 
 - [x] DB Seeding
 - [x] Nodemon, Typescript, dev setup
@@ -29,6 +30,7 @@ Accept and view orders from the restaurant site and receive payment.
 - [x] `title` field for order (and migration)
 - [x] `createOrder` mutation
 - [ ] Stripe `/checkout` endpoint
+  - [ ] Pricing (5 items) 
 - **Frontends**
   - [ ] Orders Dashboard
     - [x] Apollo Client
