@@ -11,21 +11,24 @@ generator client {
 }
 
 model Order {
-  id Int @default(autoincrement()) @id
-  title String?
-  createdAt DateTime @default(now())
-  isReady Boolean @default(false)
+  id        Int        @id @default(autoincrement())
+  title     String?
+  createdAt DateTime   @default(now())
+  isReady   Boolean    @default(false)
   lineItems LineItem[]
 }
 
 model Item {
-  id Int @default(autoincrement()) @id
-  title String
+  id       Int        @id @default(autoincrement())
+  title    String
+  LineItem LineItem[]
 }
 
 model LineItem {
-  id Int @default(autoincrement()) @id
+  id       Int    @id @default(autoincrement())
   quantity Int
-  item Item @relation(fields: [itemId], references: [id])
-  itemId Int
+  item     Item   @relation(fields: [itemId], references: [id])
+  itemId   Int
+  Order    Order? @relation(fields: [orderId], references: [id])
+  orderId  Int?
 }
