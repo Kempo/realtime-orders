@@ -1,7 +1,7 @@
 import express from 'express';
 import Stripe from 'stripe';
 
-const stripe = new Stripe("test-key-here", {
+const stripe = new Stripe("test-key", {
   apiVersion: '2020-08-27'
 });
 
@@ -33,7 +33,7 @@ routes.post('/checkout', async (req, res) => {
       }
     ],
     success_url: 'http://localhost:3000/order?success=true', // frontend starts on port 3000
-    cancel_url: 'http://localhost:3000/order/canceled=true'
+    cancel_url: 'http://localhost:3000/order?canceled=true'
   });
 
   res.json({ id: session.id });
