@@ -29,18 +29,25 @@ Allow customers to buy online from the top 5 most popular menu items.
   - [x] Cascading Deletes testing
 - [x] `title` field for order (and migration)
 - [x] `createOrder` mutation
-- [ ] Stripe `/checkout` endpoint
-  - [ ] Pricing (5 items) 
+- [x] Stripe `/checkout` endpoint
+- [x] Pricing Migration
+- [x] Centralized Menu (server-sided)
 - **Frontends**
   - [ ] Orders Dashboard
     - [x] Apollo Client
     - [x] HTTP Polling
     - [x] OrdersList Component
   - [ ] Checkout flow (customer-facing)
-    - [ ] Stripe Checkout
-    - [ ] 3 - 5 most popular menu items
+    - [x] Stripe Checkout
+    - [x] Multiple Quantity Cart
+    - [x] 5 menu items
     - [ ] Pictures Included
     - [ ] 1 pager
+    - [x] Client fetches from server (`getStaticProps`)
+    - [ ] Remove Express middleware in favor of Apollo Server
+    - [ ] Connect checkout with Prisma
+      - [ ] Add `createCheckoutSession` -> sends back `sessionId` for web client
+      - [ ] On confirmation, get order details with `sessionId`
 - [ ] Heroku Deployment (server)
 - [ ] Netlify (frontends)
 
@@ -58,7 +65,6 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
   - [ ] Checkout flow (customer-facing)
     - [ ] Include all menu items
     - [ ] 5 - 10 pictures included
-    - [ ] Basic SSG / SSR 
 
 ## Version 2 (Car)
 End-of-day transaction summary, dev and production environments, speedy and efficient data fetching, service observability
@@ -76,3 +82,7 @@ And beyond...
 ### Miscellaneous
 - [x] `.gitignore` for all `node_modules`
 
+### To address
+1. How should a restaurant owner update their menu?
+- This includes prices, new menu items, and deleting old ones
+2. Multi-restaurant integration
