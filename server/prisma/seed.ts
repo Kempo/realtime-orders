@@ -11,7 +11,8 @@ const orders = [
           quantity: 3,
           item: {
             create: {
-              title: "Lamb and Beef Gyro"
+              title: "Lamb Shawarma",
+              unitPrice: 750
             }
           }
         },
@@ -19,7 +20,8 @@ const orders = [
           quantity: 2,
           item: {
             create: {
-              title: "Ham and Cheese Sandwich"
+              title: "French Fries",
+              unitPrice: 300
             }
           }
         }
@@ -34,7 +36,8 @@ const orders = [
           quantity: 1,
           item: {
             create: {
-              title: "French Fries"
+              title: "Beef Gyro",
+              unitPrice: 750
             }
           }
         }
@@ -49,7 +52,8 @@ const orders = [
           quantity: 3,
           item: {
             create: {
-              title: "Falafel"
+              title: "Falafel Sandwich",
+              unitPrice: 750
             }
           }
         },
@@ -57,7 +61,8 @@ const orders = [
           quantity: 1,
           item: {
             create: {
-              title: "Sprite"
+              title: "Tabouli Salad",
+              unitPrice: 650
             }
           }
         }
@@ -78,6 +83,7 @@ async function seed() {
   console.log('Seeding finished!');
 }
 
+// starts seeding the db
 seed()
   .catch((e) => {
     console.error(e)

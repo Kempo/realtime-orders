@@ -24,7 +24,7 @@ export const resolvers = {
         }
       });
     },
-    menuItems: async(_, __, context: Context, ___) => {
+    menu: async(_, __, context: Context, ___) => {
       return context.prisma.item.findMany();
     }
   },

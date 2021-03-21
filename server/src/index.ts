@@ -1,8 +1,11 @@
 import { ApolloServer, gql } from 'apollo-server-express';
 import express from 'express';
+import cors from 'cors';
 import { Context, createContext } from './context';
 import { resolvers } from './resolvers';
 import routes from './routes';
+
+require('dotenv').config();
 
 const PORT = 4000;
 const app = express();
@@ -25,11 +28,12 @@ const typeDefs = gql`
   type Item {
     id: ID
     title: String
+    unitPrice: Int
   }
 
   type Query {
     orders: [Order]
-    menuItems: [Item]
+    menu: [Item]
   }
 
   input LineItemInput {
@@ -42,13 +46,28 @@ const typeDefs = gql`
     lineItems: [LineItemInput]
   }
 
+  input CreateCheckoutSessionInput {
+    lineItems: [LineItemInput]
+  }
+
   type CreateOrderPayload {
     order: Order
     errors: [String]
   }
 
+  type CreateCheckoutSessionPayload {
+    session: CheckoutSession
+    errors: [String]
+  }
+
+  type CheckoutSession {
+    id: String
+    order: Order
+  }
+
   type Mutation {
     createOrder(input: CreateOrderInput): CreateOrderPayload
+    createCheckoutSession(input: CreateCheckoutSessionInput): CreateCheckoutSessionPayload
   }
 `;
 
@@ -62,6 +81,18 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
+// TODO: specify domain
+// Setup the cross-origin resource sharing
+// Sends back the requirements to this server when hit with pre-flight
+const crossOriginOptions = {
+  origin: '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}
+
+app.use(cors(crossOriginOptions));
+
+app.use(express.json());
 app.use('/', routes);
 
 app.listen({ port: PORT }, () => {
@@ -69,8 +100,8 @@ app.listen({ port: PORT }, () => {
 });
 
 process.on('SIGINT', async () => {
-  await ctx.prisma.$disconnect();
-  
-  console.log('\n👋  Exiting...');
-  process.exit(1);
+  await ctx.prisma.$disconnect().then(() => {
+    console.log('\n👋  Exiting...');
+    process.exit(1);
+  });
 });
