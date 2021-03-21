@@ -8,9 +8,11 @@ export default function Order() {
 
     if(query.get('success')) {
       setMessage("Order confirmed!");
-    }else if(query.get('cancelled')) {
-      setMessage("Order cancelled.")
+    }else if(query.get('canceled')) {
+      setMessage("Order canceled.")
     }
+
+    // TODO: error check for query param (if no query params)
 
   }, [message]);
 
