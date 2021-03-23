@@ -44,11 +44,13 @@ Allow customers to buy online from the top 5 most popular menu items.
     - [ ] Pictures Included
     - [ ] 1 pager
     - [x] Client fetches from server (`getStaticProps`)
-    - [ ] Remove Express middleware in favor of Apollo Server
-    - [ ] Connect checkout with Prisma
-      - [ ] Add `createCheckoutSession` -> sends back `sessionId` for web client
-      - [ ] On confirmation, get order details with `sessionId`
+    - [ ] Remove HTTP route for `/checkout`
+    - [x] Connect checkout with Prisma
+      - [x] Add `createCheckoutSession` -> sends back `sessionId` for web client
+      - [x] On confirmation, get order details with `sessionId`
 - [ ] Heroku Deployment (server)
+  - [ ] GraphQL: `api.cedarsoflebanonuw.com/graphql` (private)
+  - [ ] HTTP: `api.cedarsoflebanonuw.com/`
 - [ ] Netlify (frontends)
 
 ## Version 1 (Bicycle)
