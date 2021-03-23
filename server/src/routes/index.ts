@@ -1,14 +1,16 @@
 import express from 'express';
 import Stripe from 'stripe';
-
+import { Context, getContext } from '../context';
 interface LineItem {
   id: number;
   quantity: number;
 }
 
-if(!process.env.STRIPE_TEST_KEY) {
+if(!process.env.STRIPE_TEST_KEY || !process.env.WEBHOOK_SECRET) {
   throw new Error('Unable to read environment variables.');
 }
+
+const ctx: Context = getContext();
 
 const stripe = new Stripe(process.env.STRIPE_TEST_KEY, {
   apiVersion: '2020-08-27'
@@ -19,38 +21,39 @@ const routes = express.Router();
 const items = [
   {
     "id": 1,
-    "name": "Lamb Shawarma",
-    "price": 750
+    "title": "French Fries",
+    "unitPrice": 300
   },
   {
     "id": 2,
-    "name": "French Fries",
-    "price": 300
+    "title": "Lamb Shawarma",
+    "unitPrice": 750
   },
   {
     "id": 3,
-    "name": "Beef Gyro",
-    "price": 750
+    "title": "Beef Gyro",
+    "unitPrice": 750
   },
   {
     "id": 4,
-    "name": "Falafel Sandwich",
-    "price": 750
+    "title": "Tabouli Salad",
+    "unitPrice": 650
   },
   {
     "id": 5,
-    "name": "Tabouli Salad",
-    "price": 650
+    "title": "Falafel Sandwich",
+    "unitPrice": 750
   }
-]
+];
 
 // add middleware to specific /checkout -> convert data
-routes.use('/checkout', (req, res, next) => {
+routes.use('/checkout', express.json(), (req, res, next) => {
   if(!req.body) {
+    // TODO: throwing errors vs. sending a 500 response?
     throw new Error('No request body provided.');
   }
 
-  const payload: any[] = req.body;
+  const payload: LineItem[] = req.body;
 
   console.log(payload);
 
@@ -58,7 +61,7 @@ routes.use('/checkout', (req, res, next) => {
 
     // TODO: fix parsing here
     // Eventually switch over to Prisma db
-    const found = items.find((el) => parseInt(item.id) === el.id);
+    const found = items.find((el) => item.id === el.id);
 
     if(!found) {
       throw Error('Unable to read menu items.');
@@ -68,10 +71,10 @@ routes.use('/checkout', (req, res, next) => {
       price_data: {
         currency: 'USD',
         product_data: {
-          name: found.name,
+          name: found.title,
           images: ['https://www.recipetineats.com/wp-content/uploads/2018/01/Lamb-Shawarma-Wrap.jpg'],
         },
-        unit_amount: found.price,
+        unit_amount: found.unitPrice,
       },
       quantity: item.quantity
     };
@@ -82,6 +85,7 @@ routes.use('/checkout', (req, res, next) => {
   next();
 });
 
+// Refactor out below to Apollo
 routes.post('/checkout', async (req, res) => {
 
   // QUESTION: do this?
@@ -106,10 +110,38 @@ routes.post('/checkout', async (req, res) => {
   res.json({ id: session.id });
 })
 
-routes.post('/webhook/order-complete', async (req, res) => {
-  // TODO: finish with Stripe
-  console.log(req.body);
-  res.send('webhook!');
+const endpointSecret = process.env.WEBHOOK_SECRET;
+
+const fulfillOrder = (session: Stripe.Event.Data.Object) => {
+  console.log(session);
+}
+
+routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), (req, res) => {
+
+  const payload = req.body;
+  const sig = req.headers['stripe-signature'];
+
+  if(!sig) {
+    return res.status(400).send(`Stripe signature not found.`);
+  }
+
+  let event: Stripe.Event;
+
+  try {
+    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+  } catch (err) {
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+  // Handle the checkout.session.completed event
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+
+    console.log(event.type);
+    // Fulfill the purchase...
+    fulfillOrder(session);
+  }
+
+  res.status(200).json({received: true});
 });
 
 export default routes;

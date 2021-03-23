@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-express';
 import express from 'express';
 import cors from 'cors';
-import { Context, createContext } from './context';
+import { Context, getContext } from './context';
 import { resolvers } from './resolvers';
 import routes from './routes';
 
@@ -12,7 +12,7 @@ const app = express();
 
 const typeDefs = gql`
   type Order {
-    id: ID
+    id: Int
     isReady: Boolean
     createdAt: String 
     lineItems: [LineItem]
@@ -20,13 +20,13 @@ const typeDefs = gql`
   }
 
   type LineItem {
-    id: ID
+    id: Int
     item: Item
     quantity: Int
   }
 
   type Item {
-    id: ID
+    id: Int
     title: String
     unitPrice: Int
   }
@@ -56,13 +56,8 @@ const typeDefs = gql`
   }
 
   type CreateCheckoutSessionPayload {
-    session: CheckoutSession
+    sessionId: String
     errors: [String]
-  }
-
-  type CheckoutSession {
-    id: String
-    order: Order
   }
 
   type Mutation {
@@ -71,7 +66,7 @@ const typeDefs = gql`
   }
 `;
 
-const ctx: Context = createContext();
+const ctx: Context = getContext();
 
 const server = new ApolloServer({ 
   typeDefs, 
@@ -90,9 +85,9 @@ const crossOriginOptions = {
   allowedHeaders: ['Content-Type']
 }
 
+// Set cross origin requirements
 app.use(cors(crossOriginOptions));
 
-app.use(express.json());
 app.use('/', routes);
 
 app.listen({ port: PORT }, () => {
