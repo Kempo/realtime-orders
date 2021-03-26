@@ -44,12 +44,14 @@ Allow customers to buy online from the top 5 most popular menu items.
     - [ ] Pictures Included
     - [ ] 1 pager
     - [x] Client fetches from server (`getStaticProps`)
-    - [ ] Remove HTTP route for `/checkout`
+    - [x] Remove HTTP route for `/checkout`
     - [x] Connect checkout with Prisma
       - [x] Add `createCheckoutSession` -> sends back `sessionId` for web client
       - [x] On confirmation, get order details with `sessionId`
+      - [x] Fulfill order on the backend
+      - [x] Order Summary Page
 - [ ] Heroku Deployment (server)
-  - [ ] GraphQL: `api.cedarsoflebanonuw.com/graphql` (private)
+  - [ ] GraphQL: `api.cedarsoflebanonuw.com/graphql`
   - [ ] HTTP: `api.cedarsoflebanonuw.com/`
 - [ ] Netlify (frontends)
 
@@ -57,6 +59,8 @@ Allow customers to buy online from the top 5 most popular menu items.
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
 - [ ] Timestamped orders
+- [ ] Server-sent Events (SSE) for app-wide notifications
+- [ ] Fix `orderId` in schema to required instead of nullable
 - [ ] Filtering by status, time, and order titles
 - [ ] `updateOrder` mutation
   - [ ] Enum for order status: `READY`, `WAITING`, `FINISHED`
@@ -73,7 +77,8 @@ End-of-day transaction summary, dev and production environments, speedy and effi
 
 - [ ] Pricing for Menu Items Migration
 - [ ] Idempotency
-- [ ] Websockets Integration
+- [ ] Stripe Product/Prices Integration (backend-aligned item IDs)
+- [ ] Websockets Integration (?)
 - [ ] UUID schema migration
 - [ ] Production / Dev environments
 - [ ] End-of-day Transactional Summary (email)
@@ -88,3 +93,6 @@ And beyond...
 1. How should a restaurant owner update their menu?
 - This includes prices, new menu items, and deleting old ones
 2. Multi-restaurant integration
+3. Next.js API in-house routes vs. separate server-client architecture
+- Related: hefty, opaque Apollo client implementation for client-side fetching
+4. Stripe and Prisma model misalignment (eg. line items and `StripeLineItemResponse` type)
