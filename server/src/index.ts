@@ -34,6 +34,13 @@ const typeDefs = gql`
   type Query {
     orders: [Order]
     menu: [Item]
+    order(sessionId: String): [StripeLineItemResponse]
+  }
+
+  type StripeLineItemResponse {
+    title: String
+    quantity: Int
+    totalPrice: Int
   }
 
   input LineItemInput {

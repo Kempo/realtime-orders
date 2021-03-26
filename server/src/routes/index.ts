@@ -2,7 +2,7 @@ import express from 'express';
 import Stripe from 'stripe';
 import { Context, getContext } from '../context';
 interface LineItem {
-  id: number;
+  itemId: number;
   quantity: number;
 }
 
@@ -18,105 +18,55 @@ const stripe = new Stripe(process.env.STRIPE_TEST_KEY, {
 
 const routes = express.Router();
 
-const items = [
-  {
-    "id": 1,
-    "title": "French Fries",
-    "unitPrice": 300
-  },
-  {
-    "id": 2,
-    "title": "Lamb Shawarma",
-    "unitPrice": 750
-  },
-  {
-    "id": 3,
-    "title": "Beef Gyro",
-    "unitPrice": 750
-  },
-  {
-    "id": 4,
-    "title": "Tabouli Salad",
-    "unitPrice": 650
-  },
-  {
-    "id": 5,
-    "title": "Falafel Sandwich",
-    "unitPrice": 750
-  }
-];
+const endpointSecret = process.env.WEBHOOK_SECRET;
 
-// add middleware to specific /checkout -> convert data
-routes.use('/checkout', express.json(), (req, res, next) => {
-  if(!req.body) {
-    // TODO: throwing errors vs. sending a 500 response?
-    throw new Error('No request body provided.');
-  }
+const fulfillOrder = async (session: Stripe.Checkout.Session) => {
 
-  const payload: LineItem[] = req.body;
+  // fetch the Stripe LineItems
+  const lineItems: Stripe.ApiList<Stripe.LineItem> = await stripe.checkout.sessions.listLineItems(session.id);
 
-  console.log(payload);
+  // Reduce the Stripe response to the names associated with each order
+  // TODO: fix this, in favor of using a centralized Stripe Product API to handle ids
+  const names: string[] = lineItems.data.reduce((prev: string[], curr) => {
+    return [...prev, curr.description];
+  }, [])
 
-  const processed = payload.map(item => {
-
-    // TODO: fix parsing here
-    // Eventually switch over to Prisma db
-    const found = items.find((el) => item.id === el.id);
-
-    if(!found) {
-      throw Error('Unable to read menu items.');
+  // Fetch the items that have the same names in the Stripe response
+  const dbIds = await ctx.prisma.item.findMany({
+    where: {
+      title: {
+        in: names
+      }
+    },
+    select: {
+      id: true,
+      title: true
     }
+  });
 
+  // Transform into the right form
+  // We could also the the `connect` relation instead of identifying
+  // by foreign key `itemId` directly. Either works.
+  const toCreate: LineItem[] = lineItems.data.map(stripeItem => {
     return {
-      price_data: {
-        currency: 'USD',
-        product_data: {
-          name: found.title,
-          images: ['https://www.recipetineats.com/wp-content/uploads/2018/01/Lamb-Shawarma-Wrap.jpg'],
-        },
-        unit_amount: found.unitPrice,
-      },
-      quantity: item.quantity
+      quantity: stripeItem.quantity ?? 1, // default quantity size, but that should already be listed
+      itemId: dbIds.find(el => el.title === stripeItem.description)!.id
     };
   });
 
-  req.body = processed; // update the request body
-
-  next();
-});
-
-// Refactor out below to Apollo
-routes.post('/checkout', async (req, res) => {
-
-  // QUESTION: do this?
-  // Generate product + prices beforehand: https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront
-  //    - Create Product + create Price obj
-  //    - Use `price`field in `line_items` to identify by `price_id` of the item 
+  console.log(toCreate);
   
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: req.body,
-    mode: 'payment',
-    success_url: 'http://localhost:3000/order?success=true', // frontend starts on port 3000
-    cancel_url: 'http://localhost:3000/order?canceled=true'
+  return await ctx.prisma.order.create({
+    data: {
+      // title: '', - optional
+      lineItems: {
+        create: toCreate
+      }
+    }
   });
-
-  // Sessions are created through Stripe
-  // Not saved to DB
-  // When the checkout is completed -> hit webhook `/webhook/order-complete` with session data, save order into db
-  // - Add `sessionId` to `Order` object so we can identify it on the confirmation page?
-  // - So we do need Express!
-
-  res.json({ id: session.id });
-})
-
-const endpointSecret = process.env.WEBHOOK_SECRET;
-
-const fulfillOrder = (session: Stripe.Event.Data.Object) => {
-  console.log(session);
 }
 
-routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), (req, res) => {
+routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), async (req, res) => {
 
   const payload = req.body;
   const sig = req.headers['stripe-signature'];
@@ -134,11 +84,14 @@ routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), (
   }
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
+    const session = event.data.object as Stripe.Checkout.Session;
 
-    console.log(event.type);
-    // Fulfill the purchase...
-    fulfillOrder(session);
+    // Fulfill the purchase
+    await fulfillOrder(session).catch(err => {
+
+      // TODO: what if the checkout session is completed, but the order fulfillment fails?
+      console.log(err);
+    });
   }
 
   res.status(200).json({received: true});

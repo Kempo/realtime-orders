@@ -24,6 +24,18 @@ export const resolvers = {
         }
       });
     },
+    order: async (_, { sessionId }, context: Context, ___) => {
+      const stripeResponse = await context.stripe.checkout.sessions.listLineItems(sessionId);
+
+      // TODO: do we need to seriously fetch Stripe, then transform again?
+      const transformed = stripeResponse.data.map(el => ({
+        title: el.description,
+        totalPrice: el.amount_total,
+        quantity: el.quantity
+      }));
+
+      return transformed;
+    },
     menu: async (_, __, context: Context, ___) => {
       return context.prisma.item.findMany();
     }
@@ -103,8 +115,8 @@ export const resolvers = {
         payment_method_types: ['card'],
         line_items: processed,
         mode: 'payment',
-        success_url: 'http://localhost:3000/order?success=true', // frontend starts on port 3000
-        cancel_url: 'http://localhost:3000/order?canceled=true'
+        success_url: 'http://localhost:3000/order?success=true&id={CHECKOUT_SESSION_ID}', // frontend starts on port 3000
+        cancel_url: 'http://localhost:3000/' // just redirect to home page now
       });
 
       return {
@@ -114,11 +126,19 @@ export const resolvers = {
   },
   Order: {
     lineItems: async (order, _, context: Context, __) => {
+      if(!order) {
+        throw new ApolloError('Undefined parent!');
+      }
+
       return context.loaders['lineItems'].load(order.id);
     }
   },
   LineItem: {
     item: async (lineItem, _, context: Context, __) => {
+      if(!lineItem) {
+        throw new ApolloError('Undefined parent!');
+      }
+
       return context.loaders['item'].load(lineItem.itemId);
     }
   }
