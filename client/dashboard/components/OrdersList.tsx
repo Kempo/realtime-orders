@@ -23,7 +23,7 @@ const ORDERS = gql`
 export default function OrdersList() {
 
   const { loading, error, data, networkStatus } = useQuery(ORDERS, {
-    pollInterval: 1000
+    pollInterval: 3000
   });
 
   if(error) {
