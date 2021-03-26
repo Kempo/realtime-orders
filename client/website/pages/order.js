@@ -1,24 +1,58 @@
 import { useState, useEffect } from 'react';
+import client from '../lib/apolloClient';
+import { gql } from '@apollo/client';
+
+const FETCH_ORDER_DETAILS = gql`
+query fetchOrderDetails($sessionId: String) {
+  order(sessionId: $sessionId) {
+    title
+		quantity
+  }
+}
+`
 
 export default function Order() {
-  const [message, setMessage] = useState('');
+  const [order, setOrder] = useState([]);
 
   useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search);
 
-    if(query.get('success')) {
-      setMessage("Order confirmed!");
-    }else if(query.get('canceled')) {
-      setMessage("Order canceled.")
+    async function fetch() {
+      if(params.get('id')) {
+        const { data } = await client.query({
+          query: FETCH_ORDER_DETAILS,
+          variables: {
+            sessionId: params.get('id')
+          }
+        }).catch(error => {
+          console.log(error);
+        })
+  
+        setOrder(data.order)
+      }
     }
 
-    // TODO: error check for query param (if no query params)
+    fetch();
+  }, []);
 
-  }, [message]);
+  if(order.length === 0) {
+    return <p>Whoops! Something strange happened. Text {process.env.NEXT_PUBLIC_PHONE_NUMBER} for help or swing by Cedars of Lebanon!</p>
+  }
 
   return (
     <div>
-      <p>Status: {message}</p>
+      <h1>Order Summary</h1>
+      <p>Thanks for supporting Cedars of Lebanon! <br /> Please come by within 15 minutes to pick up your order.</p>
+      <div>
+        {
+          order.length > 0 && 
+          (<ul>
+            {
+              order.map((el, i) => <li key={i}>{el.quantity}x {el.title}</li>)
+            }
+          </ul>)
+        }
+      </div>
     </div>
   )
 }
