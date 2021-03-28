@@ -32,24 +32,32 @@ Allow customers to buy online from the top 5 most popular menu items.
 - [x] Stripe `/checkout` endpoint
 - [x] Pricing Migration
 - [x] Centralized Menu (server-sided)
+- [x] Most recent order sorting default
+- [x] Menu Item mismatch (gyro vs. shawarma)
 - **Frontends**
-  - [ ] Orders Dashboard
+  - [x] Orders Dashboard
     - [x] Apollo Client
     - [x] HTTP Polling
     - [x] OrdersList Component
+    - [x] Basic Retry
   - [ ] Checkout flow (customer-facing)
     - [x] Stripe Checkout
     - [x] Multiple Quantity Cart
     - [x] 5 menu items
     - [ ] Pictures Included
     - [ ] 1 pager
+    - [ ] Basic styling for fulfillment page
+    - [ ] Styling for menu selection
     - [x] Client fetches from server (`getStaticProps`)
     - [x] Remove HTTP route for `/checkout`
     - [x] Connect checkout with Prisma
       - [x] Add `createCheckoutSession` -> sends back `sessionId` for web client
       - [x] On confirmation, get order details with `sessionId`
       - [x] Fulfill order on the backend
-      - [x] Order Summary Page
+      - [x] Order Fulfilled Page
+  - [x] Order component refactor
+  - [x] Paid status interface
+  - [x] Basic date display on orders (for now)
 - [ ] Heroku Deployment (server)
   - [ ] GraphQL: `api.cedarsoflebanonuw.com/graphql`
   - [ ] HTTP: `api.cedarsoflebanonuw.com/`
@@ -58,7 +66,7 @@ Allow customers to buy online from the top 5 most popular menu items.
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
-- [ ] Timestamped orders
+- [ ] Timestamped orders sorting (per-day orders)
 - [ ] Server-sent Events (SSE) for app-wide notifications
 - [ ] Fix `orderId` in schema to required instead of nullable
 - [ ] Filtering by status, time, and order titles
