@@ -1,0 +1,37 @@
+.order {
+  font-family: monospace;
+}
+
+.order hr {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 1px;
+  border-color: #CCC;
+}
+
+.orderNumber {
+  color: rgb(135, 135, 135);
+}
+
+.timestamp {
+  display: inline-block;
+  width: 100%;
+  color: rgb(135, 135, 135);
+}
+
+.timestamp .date {
+  float: left;
+}
+
+.timestamp .time {
+  float: right
+}
+
+.badge {
+  background-color: green;
+  color: white;
+  border-radius: 1px;
+  padding: 5px;
+  font-size: 0.75rem !important;
+  letter-spacing: 1px;
+}

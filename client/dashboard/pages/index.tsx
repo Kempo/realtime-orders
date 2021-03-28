@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import OrdersList from '../components/OrdersList'
+import OrdersList from '../components/orders/List'
 
 export default function Home() {
   return (
@@ -14,7 +14,6 @@ export default function Home() {
           Incoming Orders
         </h1>
         <p className={styles.description}>
-          Real-time order updates straight from your website.
         </p>
         <OrdersList />
       </main>
