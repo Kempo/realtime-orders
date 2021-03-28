@@ -4,6 +4,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { gql, useMutation } from '@apollo/client'
 import client from '../lib/apolloClient'
 import styles from '../styles/Home.module.css'
+import MenuItem from '../components/MenuItem'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_TEST_STRIPE_KEY);
 
@@ -12,8 +13,10 @@ interface LineItem {
   quantity: number;
 }
 
-function formatUnitPrice(unitPrice) {
-  return (unitPrice / 100);
+interface MenuItem {
+  id: number;
+  title: string;
+  unitPrice: number;
 }
 
 const CREATE_CHECKOUT_MUTATION = gql`
@@ -56,7 +59,7 @@ export default function Home(props) {
     }
   }
 
-  function onUpdateOrder(itemId) {
+  function handleQuantityUpdate(itemId) {
     return (event) => {
       const quantity: number = parseInt(event.target.value);
 
@@ -92,12 +95,18 @@ export default function Home(props) {
         <h1>Menu</h1>
         <ul>
           {
-            props.menu.map(item => (
+            props.menu.map((item: MenuItem) => (
               <li key={`${item.title}-${item.id}`}>
-                <h4>{item.title}</h4>
+                {
+                  /* 
+                                  <h4>{item.title}</h4>
                 <p>${formatUnitPrice(item.unitPrice)}</p>
                 <label htmlFor={`${item.id}-quantity`}>Quantity:</label>
                 <input type="number" id={`${item.id}-quantity`} min={0} step={1} defaultValue={0} onChange={onUpdateOrder(item.id)} />
+                  
+                  */
+                }
+                <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
               </li>
             ))
           }

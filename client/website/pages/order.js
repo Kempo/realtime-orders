@@ -42,7 +42,7 @@ export default function Order() {
   return (
     <div>
       <h1>Order Summary</h1>
-      <p>Thanks for supporting Cedars of Lebanon! <br /> Please come by within 15 minutes to pick up your order.</p>
+      <p>Thanks for supporting Cedars of Lebanon! <br /> Orders take on average about 15 minutes to complete. Please come pick it up when you're ready. </p>
       <div>
         {
           order.length > 0 && 
