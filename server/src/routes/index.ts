@@ -22,6 +22,8 @@ const endpointSecret = process.env.WEBHOOK_SECRET;
 
 const fulfillOrder = async (session: Stripe.Checkout.Session) => {
 
+  console.log('Fulfilling order...');
+
   // fetch the Stripe LineItems
   const lineItems: Stripe.ApiList<Stripe.LineItem> = await stripe.checkout.sessions.listLineItems(session.id);
 
@@ -44,21 +46,23 @@ const fulfillOrder = async (session: Stripe.Checkout.Session) => {
     }
   });
 
+  console.log('ids', dbIds);
+
   // Transform into the right form
   // We could also the the `connect` relation instead of identifying
   // by foreign key `itemId` directly. Either works.
   const toCreate: LineItem[] = lineItems.data.map(stripeItem => {
+
     return {
       quantity: stripeItem.quantity ?? 1, // default quantity size, but that should already be listed
       itemId: dbIds.find(el => el.title === stripeItem.description)!.id
     };
   });
 
-  console.log(toCreate);
-  
-  return await ctx.prisma.order.create({
+  console.log(JSON.stringify(toCreate));
+
+  return ctx.prisma.order.create({
     data: {
-      // title: '', - optional
       lineItems: {
         create: toCreate
       }
@@ -87,11 +91,13 @@ routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), a
     const session = event.data.object as Stripe.Checkout.Session;
 
     // Fulfill the purchase
-    await fulfillOrder(session).catch(err => {
+    const res = await fulfillOrder(session).catch(err => {
 
       // TODO: what if the checkout session is completed, but the order fulfillment fails?
-      console.log(err);
+      console.log('Order fulfillment error', err);
     });
+    console.log('Saved below to DB');
+    console.log(res);
   }
 
   res.status(200).json({received: true});

@@ -1,26 +1,23 @@
 import { ApolloError } from "apollo-server-express";
 import { Context } from "./context";
 
-/**
- * Sample Query:
- * 
- * Query (orders)
- *  - Order1
- *    - LineItem1
- *      - Item1
- *  - Order2
- *    - LineItem2
- *      - Item2
- *    - LineItem3
- *      - Item3
- */
-
 export const resolvers = {
   Query: {
     orders: async (_, __, context: Context, ___) => { 
-      return context.prisma.order.findMany({
-        where: {
-          isReady: false
+      // Fetches orders created on the specific day it was called 
+      // and ordered by most recent.
+      return await context.prisma.order.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        },
+        include: {
+          lineItems: {
+            select: {
+              id: true,
+              quantity: true,
+              item: true
+            }
+          }
         }
       });
     },
@@ -41,6 +38,7 @@ export const resolvers = {
     }
   },
   Mutation: {
+    // TODO remove?
     createOrder: async (_, { input }, context: Context, __) => {
       if(input === null || input.lineItems === null) {
         throw new ApolloError("Null data provided to create order.");
