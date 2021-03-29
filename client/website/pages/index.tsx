@@ -13,7 +13,7 @@ interface LineItem {
   quantity: number;
 }
 
-interface MenuItem {
+interface MenuItemType {
   id: number;
   title: string;
   unitPrice: number;
@@ -93,24 +93,25 @@ export default function Home(props) {
 
       <main className={styles.main}>
         <h1>Menu</h1>
-        <ul>
-          {
-            props.menu.map((item: MenuItem) => (
-              <li key={`${item.title}-${item.id}`}>
-                {
-                  /* 
-                                  <h4>{item.title}</h4>
-                <p>${formatUnitPrice(item.unitPrice)}</p>
-                <label htmlFor={`${item.id}-quantity`}>Quantity:</label>
-                <input type="number" id={`${item.id}-quantity`} min={0} step={1} defaultValue={0} onChange={onUpdateOrder(item.id)} />
-                  
-                  */
-                }
-                <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
-              </li>
-            ))
-          }
-        </ul>
+        <div className={styles.menuContainer}>
+          <ul className={styles.menu}>
+            {
+              props.menu.map((item: MenuItemType) => (
+                <li key={`${item.title}-${item.id}`}>
+                  <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        {/* 
+                <div className={styles.orderSummary}>
+          <p>Summary:</p>
+          <ul>
+            {cart.map(el => <li key={el.itemId}>{el.quantity} {props.menu.find(item => item.id === el.itemId).title}</li>)}
+          </ul>
+        </div>
+        */}
         <button onClick={handleClick}>
           Checkout
         </button>

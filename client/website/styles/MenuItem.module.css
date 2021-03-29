@@ -1,0 +1,21 @@
+.item {
+  border-color: rgb(232, 232, 232);
+  border-width: 1px;
+  border-style: solid;
+  padding: 40px 80px 40px 30px;
+  color: black;
+  margin: 10px;
+  width: 400px;
+}
+
+.item .description {
+  color: rgb(123, 123, 123);
+}
+
+.item h4 {
+  margin: 0px;
+}
+
+.item .selection .quantityInput {
+  width: 75px;
+}
