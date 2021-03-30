@@ -40,22 +40,26 @@ export default function Home(props) {
     // TODO: refactor out into singleton
     const stripe = await stripePromise;
 
-    const { data } = await createCheckoutSession({
-      variables: {
-        lineItems: cart
+    if(cart.length > 0) {
+      const { data } = await createCheckoutSession({
+        variables: {
+          lineItems: cart
+        }
+      });
+  
+      // When the customer clicks on the button, redirect them to Checkout.
+      const result = await stripe.redirectToCheckout({
+        sessionId: data.createCheckoutSession.sessionId,
+      });
+  
+      if (result.error) {
+        console.log(result.error.message);
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
       }
-    });
-
-    // When the customer clicks on the button, redirect them to Checkout.
-    const result = await stripe.redirectToCheckout({
-      sessionId: data.createCheckoutSession.sessionId,
-    });
-
-    if (result.error) {
-      console.log(result.error.message);
-      // If `redirectToCheckout` fails due to a browser or network
-      // error, display the localized error message to your customer
-      // using `result.error.message`.
+    }else{
+      alert('Please select a dish to order from the menu!');
     }
   }
 

@@ -1,0 +1,13 @@
+.container {
+  display: grid;
+  place-items: center;
+}
+
+.container .order {
+  width: 100%;
+  max-width: 800px;
+}
+
+.container .order .summaryTitle {
+  text-align: center;
+}
