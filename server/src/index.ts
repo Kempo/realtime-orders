@@ -5,8 +5,6 @@ import { Context, getContext } from './context';
 import { resolvers } from './resolvers';
 import routes from './routes';
 
-require('dotenv').config();
-
 const PORT = 4000;
 const app = express();
 

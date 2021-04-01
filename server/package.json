@@ -4,7 +4,8 @@
   "description": "Orders Dashboard",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon --exec 'ts-node' ./src/index.ts",
+    "dev": "nodemon --exec 'ts-node -r dotenv/config' ./src/index.ts",
+    "prod": "ts-node ./src/index.ts",
     "db:migrate": "prisma migrate dev --preview-feature",
     "db:reset": "prisma migrate reset --preview-feature",
     "db:seed": "prisma db seed --preview-feature",
