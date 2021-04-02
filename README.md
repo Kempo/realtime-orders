@@ -58,10 +58,11 @@ Allow customers to buy online from the top 5 most popular menu items.
   - [x] Order component refactor
   - [x] Paid status interface
   - [x] Basic date display on orders (for now)
+- [x] Switch to local Postgres db
 - [ ] Heroku Deployment (server)
   - [ ] GraphQL: `api.cedarsoflebanonuw.com/graphql`
   - [ ] HTTP: `api.cedarsoflebanonuw.com/`
-- [ ] Netlify (frontends)
+- [ ] Vercel (frontends)
 
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
