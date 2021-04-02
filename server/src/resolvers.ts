@@ -38,26 +38,6 @@ export const resolvers = {
     }
   },
   Mutation: {
-    // TODO remove?
-    createOrder: async (_, { input }, context: Context, __) => {
-      if(input === null || input.lineItems === null) {
-        throw new ApolloError("Null data provided to create order.");
-      }
-
-      const order = await context.prisma.order.create({
-        data: {
-          isReady: false,
-          lineItems: {
-            create: input.lineItems
-          }
-        }
-      });
-
-      return {
-        order: order,
-        errors: []
-      };
-    },
     createCheckoutSession: async (_, { input }, context: Context, __) => {
       if(input === null) {
         throw new ApolloError('Null data provided to create checkout session.');

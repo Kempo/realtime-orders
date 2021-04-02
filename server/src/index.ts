@@ -66,7 +66,6 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createOrder(input: CreateOrderInput): CreateOrderPayload
     createCheckoutSession(input: CreateCheckoutSessionInput): CreateCheckoutSessionPayload
   }
 `;
