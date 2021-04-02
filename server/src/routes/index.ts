@@ -103,4 +103,11 @@ routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), a
   res.status(200).json({received: true});
 });
 
+routes.get('/health', (req, res) => {
+  res.status(200).json({
+    prisma: ctx.prisma ? true : false,
+    stripe: true
+  })
+})
+
 export default routes;
