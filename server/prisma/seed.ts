@@ -2,6 +2,29 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const menuItems = [
+  {
+    title: "Lamb Shawarma",
+    unitPrice: 750,
+  },
+  {
+    title: "French Fries",
+    unitPrice: 300
+  },
+  {
+    title: "Beef Gyro",
+    unitPrice: 650
+  },
+  {
+    title: "Falafel Sandwich",
+    unitPrice: 650
+  },
+  {
+    title: "Tabouli Salad",
+    unitPrice: 650
+  }
+]
+
 const orders = [
   {
     title: "Mark",
@@ -72,9 +95,10 @@ const orders = [
 ];
 
 async function seed() {
-  orders.forEach(async (order) => {
-    await prisma.order.create({
-      data: order
+  // TODO: distinguish between production and dev seeds
+  menuItems.forEach(async (item) => {
+    await prisma.item.create({
+      data: item
     }).catch(err => {
       console.log(err);
     });
