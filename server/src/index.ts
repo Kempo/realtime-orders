@@ -5,7 +5,7 @@ import { Context, getContext } from './context';
 import { resolvers } from './resolvers';
 import routes from './routes';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 const typeDefs = gql`
