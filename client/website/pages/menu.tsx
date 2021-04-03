@@ -57,7 +57,7 @@ export default function Menu(props) {
   
       // When the customer clicks on the button, redirect them to Checkout.
       const result = await stripe.redirectToCheckout({
-        sessionId: data.createCheckoutSession.sessionId,
+        sessionId: data.createCheckoutSession.sessionId
       });
   
       if (result.error) {

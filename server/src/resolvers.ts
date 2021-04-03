@@ -93,8 +93,8 @@ export const resolvers = {
         payment_method_types: ['card'],
         line_items: processed,
         mode: 'payment',
-        success_url: 'http://localhost:3000/order?success=true&id={CHECKOUT_SESSION_ID}', // frontend starts on port 3000
-        cancel_url: 'http://localhost:3000/' // just redirect to home page now
+        success_url: `${process.env.BASE_URL}/order?success=true&id={CHECKOUT_SESSION_ID}`, // frontend starts on port 3000
+        cancel_url: `${process.env.BASE_URL}` // just redirect to home page now
       });
 
       return {

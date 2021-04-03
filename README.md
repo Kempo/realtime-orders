@@ -63,6 +63,7 @@ Allow customers to buy online from the top 5 most popular menu items.
 - [ ] Vercel (frontends)
 - [x] Set actual development webhook URL (update env variable)
 - [ ] Client website switchover (add menu page) 
+- [ ] Google Analytics (Client website)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
