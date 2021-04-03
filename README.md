@@ -40,14 +40,14 @@ Allow customers to buy online from the top 5 most popular menu items.
     - [x] HTTP Polling
     - [x] OrdersList Component
     - [x] Basic Retry
-  - [ ] Checkout flow (customer-facing)
+  - [x] Checkout flow (customer-facing)
     - [x] Stripe Checkout
     - [x] Multiple Quantity Cart
     - [x] 5 menu items
-    - [ ] Pictures Included
-    - [ ] 1 pager
-    - [ ] Basic styling for fulfillment page
-    - [ ] Styling for menu selection
+    - [x] ~~1 pager~~
+    - [x] Basic styling for fulfillment page
+      - [x] `Loading` and `Error` displays
+    - [x] Basic styling for menu selection
     - [x] Client fetches from server (`getStaticProps`)
     - [x] Remove HTTP route for `/checkout`
     - [x] Connect checkout with Prisma
@@ -57,16 +57,18 @@ Allow customers to buy online from the top 5 most popular menu items.
       - [x] Order Fulfilled Page
   - [x] Order component refactor
   - [x] Paid status interface
-  - [x] Basic date display on orders (for now)
+  - [x] Basic date display on orders (**Note**: for now, and not a permanent solution)
 - [x] Switch to local Postgres db
 - [x] Heroku Deployment (server)
-- [ ] Vercel (frontends)
+- [x] Vercel (frontends)
 - [x] Set actual development webhook URL (update env variable)
-- [ ] Client website switchover (add menu page) 
+- [x] Client website switchover (add menu page) 
 - [ ] Google Analytics (Client website)
+- [ ] Ignore Builds Setting (Client and Dashboard)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [ ] Menu Pictures Included
 - [ ] Timestamped orders sorting (per-day orders)
 - [ ] Server-sent Events (SSE) for app-wide notifications
 - [ ] Fix `orderId` in schema to required instead of nullable
