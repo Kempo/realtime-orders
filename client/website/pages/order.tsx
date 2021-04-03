@@ -22,44 +22,69 @@ interface MenuItemType {
 }
 
 export default function Order() {
-  const [order, setOrder] = useState([]);
+  const [status, setStatus] = useState({
+    lineItems: [],
+    loading: true
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
     async function fetch() {
       if(params.get('id')) {
-        const res = await client.query<OrderResponse>({
-          query: FETCH_ORDER_DETAILS,
-          variables: {
-            sessionId: params.get('id')
-          }
-        })
+        try {
+          const res = await client.query<OrderResponse>({
+            query: FETCH_ORDER_DETAILS,
+            variables: {
+              sessionId: params.get('id')
+            }
+          })
 
-        if(!res.error) {
-          setOrder(res.data.order);
-        }else{
-          console.log(res.error.message);
-        }  
+          setStatus({
+            lineItems: res.data.order,
+            loading: false
+          });
+
+        }catch(err) {
+          setStatus({
+            lineItems: [],
+            loading: false
+          });
+        } 
       }
     }
 
     fetch();
   }, []);
 
+
   return (
     <div className={styles.container}>
       <div className={styles.order}>
-      {
-        order.length === 0 ? <Error /> : <Success order={order} />
-      }
+        { 
+          status.loading ? <Loading /> : (status.lineItems.length === 0 ? <Error /> : <Success order={status.lineItems} />)
+        }
       </div>
     </div>
   )
 }
 
 function Error() {
-  return <p>Whoops! Something strange happened. Text {process.env.NEXT_PUBLIC_PHONE_NUMBER} for help or swing by Cedars of Lebanon!</p>
+  return (
+    <React.Fragment>
+      <h1>Whoops!</h1>
+      <p>Something strange happened. <br /> Text {process.env.NEXT_PUBLIC_PHONE_NUMBER} for help or swing by Cedars of Lebanon!</p>
+    </React.Fragment>
+  )
+}
+
+function Loading() {
+  return (
+    <React.Fragment>
+      <h1>Loading...</h1>
+      <p>This might take a little longer than usual. Thank you for being patient!</p>
+    </React.Fragment>
+  );
 }
 
 function Success({ order }) {

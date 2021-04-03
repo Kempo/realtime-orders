@@ -29,14 +29,6 @@ const CREATE_CHECKOUT_MUTATION = gql`
   }
 `;
 
-const tempDescriptions = [
-  'Tender lamb cuts wrapped in pita with house special sauce, lettuce, tomatoes, onions, and parsley.',
-  'Fresh, crispy french fries.',
-  'Levantine salad of chopped parsley, tomatoes, onion, olive oil, lemon juice, salt and pepper.',
-  'Beef cuts wrapped in pita with tzaziki sauce, tomatoes, house special sauce, onions, and parsley.',
-  'Crispy, deep-fried house special falafel mix served with pita bread, house special sauce, tomatoes, lettuce, and onions.'
-]
-
 export default function Menu(props) {
 
   const [cart, updateCart] = useState<LineItem[]>([]);
@@ -111,7 +103,7 @@ export default function Menu(props) {
             {
               props.menu.map((item: MenuItemType, index) => (
                 <li key={`${item.title}-${item.id}`}>
-                  <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} description={tempDescriptions[index]} />
+                  <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
                 </li>
               ))
             }
