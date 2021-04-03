@@ -19,6 +19,7 @@
 .menuContainer {
   display: flex;
   justify-content: center;
+  margin-bottom: 48px;
 }
 
 .menuContainer .menu {
@@ -28,4 +29,8 @@
   padding: 0px;
   width: 100%;
   max-width: 1100px;
+}
+
+.description {
+  max-width: 550px;
 }

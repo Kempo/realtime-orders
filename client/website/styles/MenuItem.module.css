@@ -1,3 +1,16 @@
+@media screen and (max-width: 700px) {
+  .item {
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 701px) {
+  .item {
+    width: 500px;
+    height: 240px;
+  }
+}
+
 .item {
   border-color: rgb(232, 232, 232);
   border-width: 1px;
@@ -5,7 +18,6 @@
   padding: 40px 80px 40px 30px;
   color: black;
   margin: 10px;
-  width: 400px;
 }
 
 .item .description {

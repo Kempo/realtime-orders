@@ -1,3 +1,29 @@
+@media screen and (max-width: 700px) {
+  .about, .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 24px;
+  }
+
+  .logo {
+    margin: 25px;
+  }
+}
+
+@media screen and (min-width: 701px) {
+  .about, .contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 64px 48px;
+  }
+
+  .logo {
+    margin: 0px;
+  }
+}
+
 .container {
   margin: auto;
 }
@@ -14,11 +40,6 @@
 }
 
 .contact {
-  padding: 64px 48px;
-  display: flex;
-  // background-color: rgb(247, 247, 247);
-  justify-content: space-between;
-
   h1 {
     font-family: "Grenoble Serial Bold", serif;
     color: #E14046;
@@ -36,9 +57,6 @@
 
 .about {
   margin-bottom: 32px;
-  padding: 64px 48px;
-  display: flex;
-  justify-content: space-between;
   background-color: rgb(249, 249, 249);
 
   h1 {
