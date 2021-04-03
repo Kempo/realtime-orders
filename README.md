@@ -13,6 +13,10 @@ Stack: Next.js, Typescript, Apollo Client
 ## Server
 Stack: Node.js, Typescript, Apollo Server (GraphQL), Sqlite3, Prisma, Express
 
+## Deployment
+1. Server is deployed on Heroku using the [Heroku Monorepo buildpack](https://github.com/lstoll/heroku-buildpack-monorepo) and with a Postgres database attached.
+2. Both dashboard and main customer website are deployed on Vercel using sub-directories.
+
 ## Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payment.
 Allow customers to buy online from the top 5 most popular menu items.
@@ -64,11 +68,19 @@ Allow customers to buy online from the top 5 most popular menu items.
 - [x] Set actual development webhook URL (update env variable)
 - [x] Client website switchover (add menu page) 
 - [ ] Google Analytics (Client website)
-- [ ] Ignore Builds Setting (Client and Dashboard)
+- [x] Ignore Builds Setting (Client and Dashboard)
+- [ ] Connect Stripe to bank account
+- [ ] Switch over to production API Stripe keys
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
-- [ ] Menu Pictures Included
+- [ ] Item descriptions
+  - [ ] Column addition (migration)
+  - [ ] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
+  - [ ] Update existing items
+- [ ] Menu item pictures (served through CloudFront?)
+  - [ ] Column addition (migration)
+  - [ ] File serving
 - [ ] Timestamped orders sorting (per-day orders)
 - [ ] Server-sent Events (SSE) for app-wide notifications
 - [ ] Fix `orderId` in schema to required instead of nullable
