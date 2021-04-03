@@ -1,9 +1,26 @@
+@font-face {
+  font-family: "Grenoble Serial Bold";
+  src: url("/fonts/grenoble-serial-bold.woff2") format("woff2"),
+       url("/fonts/grenoble-serial-bold.woff") format("woff");
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 300;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
 }
 
 hr {
@@ -14,9 +31,38 @@ hr {
 
 a {
   color: inherit;
-  text-decoration: none;
 }
 
 * {
   box-sizing: border-box;
+}
+
+button {
+  padding: 10px 30px;
+  border-color: #009B58;
+  border-style: solid;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  color: #009B58;
+}
+
+button:hover, button:active {
+  background-color: #009B58;
+  color: white;
+}
+
+footer {
+  background-color: #009B58;
+  padding: 24px 48px;
+  color: white;
+}
+
+footer h1 {
+  font-family: 'Grenoble Serial Bold', serif;
+  letter-spacing: 1px;
+}
+
+footer p {
+  line-height: 125%;
 }

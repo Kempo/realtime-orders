@@ -1,0 +1,65 @@
+.container {
+  margin: auto;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.logo {
+  margin-bottom: 48px;
+}
+
+.contact {
+  padding: 64px 48px;
+  display: flex;
+  // background-color: rgb(247, 247, 247);
+  justify-content: space-between;
+
+  h1 {
+    font-family: "Grenoble Serial Bold", serif;
+    color: #E14046;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1.25em;
+    color:rgb(114, 114, 114);
+    line-height: 150%;
+  }
+}
+
+.about {
+  margin-bottom: 32px;
+  padding: 64px 48px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(249, 249, 249);
+
+  h1 {
+    font-family: "Grenoble Serial Bold", serif;
+    color: #E14046;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1.25em;
+    color:black;
+    max-width: 500px;
+    text-align: left;
+    line-height: 125%;
+  }
+}
+
+.picture {
+  display: flex;
+  justify-content: center;
+  margin: 0px 0px 64px 0px;
+}

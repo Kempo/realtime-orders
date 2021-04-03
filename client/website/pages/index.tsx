@@ -1,157 +1,43 @@
-import Head from 'next/head'
-import { useState } from 'react'
-import { loadStripe } from '@stripe/stripe-js'
-import { gql, useMutation } from '@apollo/client'
-import client from '../lib/apolloClient'
-import styles from '../styles/Home.module.css'
-import MenuItem from '../components/MenuItem'
+import Image from 'next/image';
+import Link from 'next/link';
+import Contact from '../components/Contact';
+import styles from '../styles/Home.module.scss';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_TEST_STRIPE_KEY);
-
-interface LineItem {
-  itemId: number;
-  quantity: number;
-}
-
-interface MenuItemType {
-  id: number;
-  title: string;
-  unitPrice: number;
-}
-
-const CREATE_CHECKOUT_MUTATION = gql`
-  mutation CreateCheckout($lineItems: [LineItemInput]) {
-    createCheckoutSession(input: {
-      lineItems: $lineItems
-    }) {
-      sessionId
-    }
-  }
-`;
-
-export default function Home(props) {
-
-  const [cart, updateCart] = useState<LineItem[]>([]);
-  const [createCheckoutSession] = useMutation(CREATE_CHECKOUT_MUTATION, { 
-    client
-  });
-
-  async function handleClick(_) {
-    // TODO: refactor out into singleton
-    const stripe = await stripePromise;
-
-    if(cart.length > 0) {
-      const { data } = await createCheckoutSession({
-        variables: {
-          lineItems: cart
-        }
-      });
-  
-      // When the customer clicks on the button, redirect them to Checkout.
-      const result = await stripe.redirectToCheckout({
-        sessionId: data.createCheckoutSession.sessionId,
-      });
-  
-      if (result.error) {
-        console.log(result.error.message);
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer
-        // using `result.error.message`.
-      }
-    }else{
-      alert('Please select a dish to order from the menu!');
-    }
-  }
-
-  function handleQuantityUpdate(itemId) {
-    return (event) => {
-      const quantity: number = parseInt(event.target.value);
-
-      const isTracked = cart.some(item => item.itemId === itemId);
-
-      if(quantity === 0 && isTracked) {
-        // remove item from cart
-        const updated = cart.reduce((prev, current) => {
-          return current.itemId !== itemId ? [...prev, current] : prev;
-        }, []);
-
-        updateCart(updated);
-      }else if (quantity > 0 && !isTracked) {
-
-        // append item to the cart
-        updateCart([...cart, { itemId: itemId, quantity }])
-      }else if (quantity > 0 && isTracked) {
-
-        // update item quantity in the cart
-        updateCart(cart.map(lineItem => lineItem.itemId === itemId ? { itemId: itemId, quantity } : lineItem))
-      }
-    };
-  }
-
+export default function Home() {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Cedars of Lebanon</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1>Menu</h1>
-        <div className={styles.menuContainer}>
-          <ul className={styles.menu}>
-            {
-              props.menu.map((item: MenuItemType) => (
-                <li key={`${item.title}-${item.id}`}>
-                  <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
-                </li>
-              ))
-            }
-          </ul>
+      <div className={styles.landing}>
+        <div className={styles.logo}>
+          <Image src="/main.svg" alt="Cedars of Lebanon Logo" width="490" height="320" />
         </div>
-        {/* 
-                <div className={styles.orderSummary}>
-          <p>Summary:</p>
-          <ul>
-            {cart.map(el => <li key={el.itemId}>{el.quantity} {props.menu.find(item => item.id === el.itemId).title}</li>)}
-          </ul>
-        </div>
-        */}
-        <button onClick={handleClick}>
-          Checkout
-        </button>
-      </main>
-
-      <footer className={styles.footer}>
-        <p>Made by K.</p>
-      </footer>
+        <Link href="/menu">
+          <a>
+            <button className={styles.orderButton}>
+              Order Online
+            </button>
+          </a>
+        </Link>
+      </div>
+      <div id="about" className={styles.about}>
+          <h1>About Us</h1>
+          <p>
+            <b>Cedars of Lebanon</b> has been serving Seattle since 1976. 
+            <br /> 
+            We are family-run and serve the best gyros and falafels in town. We use fresh ingredients and take pride in making a delicious meal for you!
+            <br /> 
+            <br />
+            Come stop by and say hello! We'd love to see you.
+          </p>
+      </div>
+      <div className={styles.picture}>
+        <Image src="https://d7xe6a0v1wpai.cloudfront.net/restaurant.jpeg" alt="Cedars of Lebanon Logo" width="901" height="591" />
+      </div>
+      <div id="contact" className={styles.contact}>
+        <h1>
+          Contact Us
+        </h1>
+        <Contact />
+      </div>
     </div>
   )
-}
-
-export async function getStaticProps(context) {
-  const { data, error } = await client.query(
-    {
-      query: gql`
-        query MenuItems {
-          menu {
-            id
-            title
-            unitPrice
-          }
-        }
-      `
-    }
-  )
-
-  if (error) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: {
-      ...data
-    },
-  }
 }
