@@ -12,6 +12,10 @@ query fetchOrderDetails($sessionId: String) {
 }
 `
 
+interface OrderResponse {
+  order: MenuItemType[];
+}
+
 interface MenuItemType {
   title: string;
   quantity: number;
@@ -25,7 +29,7 @@ export default function Order() {
 
     async function fetch() {
       if(params.get('id')) {
-        const res = await client.query<MenuItemType[]>({
+        const res = await client.query<OrderResponse>({
           query: FETCH_ORDER_DETAILS,
           variables: {
             sessionId: params.get('id')
@@ -33,7 +37,7 @@ export default function Order() {
         })
 
         if(!res.error) {
-          setOrder(res.data)
+          setOrder(res.data.order);
         }else{
           console.log(res.error.message);
         }  
@@ -67,6 +71,7 @@ function Success({ order }) {
       <p>Orders take on average about 15 minutes to complete. <br /> Please come pick it up when you're ready. </p>
       <ContactInformation />
       <div>
+        <h2>Receipt</h2>
         {
           order.length > 0 && 
           (<ul>

@@ -1,11 +1,13 @@
 .container {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .container .order {
   width: 100%;
   max-width: 800px;
+  margin: 15px;
 }
 
 .container .order .summaryTitle {
