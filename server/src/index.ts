@@ -81,8 +81,6 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 // TODO: specify domain
-// Setup the cross-origin resource sharing
-// Sends back the requirements to this server when hit with pre-flight
 const crossOriginOptions = {
   origin: '*',
   methods: ['GET', 'POST'],
@@ -95,7 +93,7 @@ app.use(cors(crossOriginOptions));
 app.use('/', routes);
 
 app.listen({ port: PORT }, () => {
-  console.log(`🚀  Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  console.log(`🚀  Server ready at port ${PORT} and route ${server.graphqlPath}`);
 });
 
 process.on('SIGINT', async () => {

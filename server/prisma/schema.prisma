@@ -2,8 +2,6 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  // provider = "sqlite"
-  // url      = "file:./dev.db"
   provider    = "postgresql"
   url         = env("DATABASE_URL")
 }
@@ -25,8 +23,8 @@ model Order {
 // (unitPrice refers to the price of the item at the lowest denomination ie. cents)
 model Item {
   id       Int        @id @default(autoincrement())
-  title    String
-  unitPrice Int @default(0)
+  title    String     @unique
+  unitPrice Int       @default(0)
   LineItem LineItem[]
 }
 
