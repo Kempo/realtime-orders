@@ -67,13 +67,19 @@ Allow customers to buy online from the top 5 most popular menu items.
 - [x] Vercel (frontends)
 - [x] Set actual development webhook URL (update env variable)
 - [x] Client website switchover (add menu page) 
-- [ ] Google Analytics (Client website)
+- [x] Google Analytics (Client)
 - [x] Ignore Builds Setting (Client and Dashboard)
+- [x] **Priority**: Update menu work flow on production (add items, update prices)
+  - [x] Ad-hoc script / `upsert` seeding
+- [ ] Align Postgres db to table structure of Stripe
 - [ ] Connect Stripe to bank account
 - [ ] Switch over to production API Stripe keys
+- [ ] **Final Action**: publish domains officially (remove Netlify connection)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [ ] Specify acceptable domains (cross-origin)
+- [ ] `checkoutSessionId` field to `Order` (match `orderId` with `checkoutSessionId`)
 - [ ] Item descriptions
   - [ ] Column addition (migration)
   - [ ] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
