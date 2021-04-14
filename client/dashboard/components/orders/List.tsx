@@ -43,33 +43,36 @@ export default function OrdersList() {
   if(error || networkStatus === NetworkStatus.error) {
     return (
       <div>
-        <p>Error! Please try refreshing.</p>
-        <p>If this keep occurring, please call/text {process.env.NEXT_PUBLIC_PHONE_NUMBER}.</p>
+        <p>Error! Please try refreshing the web page.</p>
+        <p>If this keeps occurring, please call/text {process.env.NEXT_PUBLIC_PHONE_NUMBER}.</p>
       </div>
     );
   }
 
   if(loading) {
-    return <div>Loading...</div>
+    return (<div>
+      <h1>Loading...</h1>
+      <p><b>Note:</b> starting up the website may take a few seconds.</p>
+    </div>);
   }
 
   return (
-    <div>
-      <div>
-        <p>Status: {pollStatus ? "Active" : "Inactive"}</p>
-      </div>
-      <div>
-        <button onClick={togglePolling}>Toggle</button>
+    <>
+      <div className={styles.header}>
+        <div className={styles.controller}>
+          <p><b>Status:</b> {pollStatus ? "Active" : "Inactive"}</p>
+          <button onClick={togglePolling}>Toggle</button>
+        </div>
       </div>
       <div className={styles.table}>
         <ul className={styles.orders}>
-        {data && data.orders.map(order => 
-          <li key={order.id} className={styles.card}>
-            <Order {...order} />
-          </li>
-        )}
+          {data && data.orders.length == 0 ? <p className={styles.noOrders}>No orders.</p> : data.orders.map(order => 
+            <li key={order.id} className={styles.card}>
+              <Order {...order} />
+            </li>
+          )} 
         </ul>
       </div>
-    </div>
+    </>
   )
 }

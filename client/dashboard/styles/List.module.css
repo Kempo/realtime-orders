@@ -1,3 +1,7 @@
+.noOrders {
+  text-align: center;
+}
+
 .orders {
   list-style-type: none;
   padding: 0px;
@@ -7,11 +11,10 @@
 .table {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 3rem;
 }
 
 .card {
-  margin: 1rem;
+  margin: 1rem 0rem 1rem 0rem;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -30,4 +33,20 @@
   margin: 0;
   line-height: 1.5;
   font-size: 1.25rem;
+}
+
+.header {
+  display: flex;
+  border-width: 1px;
+  border-color: #009b58;
+  background-color: #009b58;
+  border-style: solid;
+  border-radius: 0px 0px 10px 10px;
+  padding: 1.5rem;
+  color: white;
+  box-shadow: 0px 2px 4px rgba(0,0,0,.1);
+}
+
+.controller p {
+  margin-top: 0px;
 }
