@@ -8,11 +8,9 @@ export default function Home() {
       <Head>
         <title>Incoming Orders | Cedars of Lebanon</title>
       </Head>
-
       <main className={styles.main}>
         <OrdersList />
       </main>
-
       <footer className={styles.footer}>
         <p>Bottom of page.</p>
       </footer>
