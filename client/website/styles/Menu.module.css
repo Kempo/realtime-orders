@@ -7,6 +7,18 @@
   align-items: center;
 }
 
+@media screen and (max-width: 700px) {
+  .listItem {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 701px) {
+  .listItem {
+    width: 50%;
+  }
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;

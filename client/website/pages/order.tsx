@@ -113,6 +113,7 @@ function Success({ order }) {
 function ContactInformation() {
   return (
     <div>
+      <h2>Address</h2>
       <p>1319 NE 43rd St, Seattle, WA 98105</p>
       <p>(206) 632-7708</p>
     </div>

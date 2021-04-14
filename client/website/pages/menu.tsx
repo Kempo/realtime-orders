@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { gql, useMutation } from '@apollo/client'
@@ -102,7 +101,7 @@ export default function Menu(props) {
           <ul className={styles.menu}>
             {
               props.menu.map((item: MenuItemType, index) => (
-                <li key={`${item.title}-${item.id}`}>
+                <li className={styles.listItem} key={`${item.title}-${item.id}`}>
                   <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
                 </li>
               ))
