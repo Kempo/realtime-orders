@@ -11,11 +11,29 @@ A real-time orders dashboard for a local restaurant in Seattle.
 Stack: Next.js, Typescript, Apollo Client
 
 ## Server
-Stack: Node.js, Typescript, Apollo Server (GraphQL), Sqlite3, Prisma, Express
+Stack: Node.js, Typescript, Apollo Server, Postgresql, Prisma, Express
 
 ## Deployment
-1. Server is deployed on Heroku using the [Heroku Monorepo buildpack](https://github.com/lstoll/heroku-buildpack-monorepo) and with a Postgres database attached.
+1. Server is deployed on Heroku using the [Heroku Monorepo buildpack](https://github.com/lstoll/heroku-buildpack-monorepo) with a Postgres database attached.
 2. Both dashboard and main customer website are deployed on Vercel using sub-directories.
+
+## Running locally
+Navigate to the following subdirectories and run the following commands for each:
+
+1. Orders Dashboard / Customer Website (ports `3001` and `3000`):
+```
+yarn dev
+```
+2. Server (on port `4000`): 
+
+```
+npm run dev
+```
+
+If you're testing out Stripe webhooks, be sure to also run:
+```
+stripe listen --forward-to localhost:4000/v1/payment/complete
+```
 
 ## Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payment.
@@ -71,13 +89,13 @@ Allow customers to buy online from the top 5 most popular menu items.
 - [x] Ignore Builds Setting (Client and Dashboard)
 - [x] **Priority**: Update menu work flow on production (add items, update prices)
   - [x] Ad-hoc script / `upsert` seeding
-- [ ] Align Postgres db to table structure of Stripe
 - [ ] Connect Stripe to bank account
 - [ ] Switch over to production API Stripe keys
 - [ ] **Final Action**: publish domains officially (remove Netlify connection)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [ ] Align Postgres db to table structure of Stripe
 - [ ] Specify acceptable domains (cross-origin)
 - [ ] `checkoutSessionId` field to `Order` (match `orderId` with `checkoutSessionId`)
 - [ ] Item descriptions
