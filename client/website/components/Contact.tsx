@@ -1,8 +1,10 @@
+import hours from '../lib/restaurantDetails.json';
+
 export default function Contact() {
   return (
     <div>
       <p>
-        <b>Hours:</b> 11 am - 7 pm
+        <b>Hours:</b> {hours.openTime} am - {hours.closeTime} pm
         <br />
         Monday to Saturday
         <br />

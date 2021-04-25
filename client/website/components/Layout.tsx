@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import hours from '../lib/restaurantDetails.json';
 import Contact from '../components/Contact';
 import styles from '../styles/Layout.module.scss';
 
@@ -22,7 +23,7 @@ export default function Layout({ children }) {
         <div className={styles.notice}>
           <p>TAKEOUT & DINE-IN</p>
           <span className={styles.separator} />
-          <p>11 - 8 DAILY</p>
+          <p>{hours.openTime} - {hours.closeTime} DAILY</p>
           <span className={styles.separator} />
           <p>CLOSED SUNDAY</p>
         </div>
