@@ -7,7 +7,7 @@ async function seed() {
   menuItems.forEach(async (item) => {
     await prisma.item.upsert({
       where: {
-        title: item.title
+        id: item.id
       },
       create: item,
       update: item
