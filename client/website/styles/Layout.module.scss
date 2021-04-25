@@ -58,8 +58,9 @@
   background-color: #009B58;
   box-shadow: 0px 2px 4px rgba(0,0,0,.1);
   color: white;
-  font-family: "Lato", sans-serif;
+  font-family: "Grenoble Serial Bold", sans-serif;
   font-weight: 400;
+  font-size: 1.25rem;
 
   display: flex;
   justify-content: center;
@@ -67,7 +68,7 @@
 
   p {
     margin: 0px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
   }
 
   .separator {
@@ -75,7 +76,7 @@
     height: 16px;
     background-color: white;
     border-radius: 1px;
-    margin: 0px 10px;
+    margin: 0px 20px;
   }
 }
 
