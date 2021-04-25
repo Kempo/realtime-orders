@@ -7,7 +7,7 @@ if(!process.env.STRIPE_TEST_KEY) {
 }
 
 const prisma = new PrismaClient({
-  log: ['query']
+  log: []
 });
 
 const stripe = new Stripe(process.env.STRIPE_TEST_KEY, {
@@ -16,7 +16,7 @@ const stripe = new Stripe(process.env.STRIPE_TEST_KEY, {
 
 // batch all the items in every LineItem in 1 request
 async function batchItems(batchItemIds) {
-  const result = prisma.item.findMany({
+  const result = await prisma.item.findMany({
     where: {
       id: {
         in: batchItemIds as number[]
@@ -24,7 +24,19 @@ async function batchItems(batchItemIds) {
     }
   })
 
-  return result;
+  // Order the Prisma response to match the ordering
+  // of the itemId's
+  const orderedResponses: Item[] = [];
+
+  batchItemIds.forEach(id => {
+    const found = result.find(item => item.id === id);
+
+    if(found !== undefined) {
+      orderedResponses.push(found)
+    }
+  });
+
+  return orderedResponses;
 }
 
 // batch all the LineItems in every order in 1 request
