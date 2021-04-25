@@ -7,9 +7,36 @@
 .container .order {
   width: 100%;
   max-width: 800px;
-  margin: 15px;
+  margin: 15px 15px 80px 15px;
+}
+
+.container .order .logo {
+  margin: auto;
+  width: 250px;
 }
 
 .container .order .summaryTitle {
   text-align: center;
 }
+
+.receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.receipt table {
+  max-width: 500px;
+  width: 75%;
+  min-width: 280px;
+}
+
+.receipt .itemName {
+  text-align: left;
+}
+
+.receipt .amountTotal {
+  text-align: right;
+}
+

@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { gql } from '@apollo/client';
 import styles from '../styles/Order.module.css';
 import client from '../lib/apolloClient';
+import formatter from '../lib/dollarFormatter';
+
 
 const FETCH_ORDER_DETAILS = gql`
 query fetchOrderDetails($sessionId: String) {
   order(sessionId: $sessionId) {
     title
 		quantity
+    amountTotal
   }
 }
 `
@@ -19,6 +23,7 @@ interface OrderResponse {
 interface MenuItemType {
   title: string;
   quantity: number;
+  amountTotal: number;
 }
 
 export default function Order() {
@@ -33,7 +38,7 @@ export default function Order() {
     async function fetch() {
       if(params.get('id')) {
         try {
-          const res = await client.query<OrderResponse>({
+          const queryResponse = await client.query<OrderResponse>({
             query: FETCH_ORDER_DETAILS,
             variables: {
               sessionId: params.get('id')
@@ -41,7 +46,7 @@ export default function Order() {
           })
 
           setStatus({
-            lineItems: res.data.order,
+            lineItems: queryResponse.data.order,
             loading: false
           });
 
@@ -61,8 +66,13 @@ export default function Order() {
   return (
     <div className={styles.container}>
       <div className={styles.order}>
+        <div className={styles.logo}>
+          <Image src="/main.svg" alt="Cedars of Lebanon Logo" width="490" height="320" />
+        </div>
         { 
-          status.loading ? <Loading /> : (status.lineItems.length === 0 ? <Error /> : <Success order={status.lineItems} />)
+          status.loading ? 
+            <Loading /> : 
+            (status.lineItems.length === 0 ? <Error /> : <Success order={status.lineItems} />)
         }
       </div>
     </div>
@@ -87,35 +97,50 @@ function Loading() {
   );
 }
 
-function Success({ order }) {
+function Success({ order }:{ order: MenuItemType[] }) {
+
+  const totalPrice = order.reduce((prev, cur) => {
+    return prev + (cur.amountTotal);
+  }, 0);
+
   return (
     <React.Fragment>
-      <h1 className={styles.summaryTitle}>Order Summary</h1>
+      <h1 className={styles.summaryTitle}>Thank you for supporting!</h1>
       <hr />
-      <h2>Thanks for supporting Cedars of Lebanon!</h2>
       <p>Orders take on average about 15 minutes to complete. <br /> Please come pick it up when you're ready. </p>
-      <ContactInformation />
-      <div>
-        <h2>Receipt</h2>
-        {
-          order.length > 0 && 
-          (<ul>
-            {
-              order.map((el: MenuItemType, i: number) => <li key={i}>{el.quantity}x {el.title}</li>)
-            }
-          </ul>)
-        }
+      <div className={styles.receipt}>
+        <h2>Order Summary</h2>
+        <table>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+          </tr>
+          {
+            order.length > 0 && order.map((el: MenuItemType, i: number) =>  
+              <tr key={i}>
+                <td className={styles.itemName}>{el.quantity}x {el.title}</td>
+                <td className={styles.amountTotal}>{formatter.format(el.amountTotal / 100)}</td>
+              </tr>
+            )
+          }
+          <tr>
+            <td><b>Total:</b></td>
+            <td className={styles.amountTotal}><b>{formatter.format(totalPrice / 100)}</b></td>
+          </tr>
+        </table>
       </div>
+      <Instructions />
     </React.Fragment>
   )
 }
 
-function ContactInformation() {
+function Instructions() {
   return (
     <div>
-      <h2>Address</h2>
-      <p>1319 NE 43rd St, Seattle, WA 98105</p>
+      <h2>Pick your order up at:</h2>
+      <a href="https://www.google.com/maps/place/Cedars+of+Lebanon/@47.6597139,-122.3134208,19.17z/data=!4m5!3m4!1s0x0:0x91c70c3f32afc6f5!8m2!3d47.6597151!4d-122.3135296" target="_blank" rel="noopener noreferrer">1319 NE 43rd St, Seattle, WA 98105</a>
       <p>(206) 632-7708</p>
+      <p>When you arrive, please tell the cashier your order.</p>
     </div>
   )
 }
