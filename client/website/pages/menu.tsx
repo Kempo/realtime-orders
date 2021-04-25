@@ -90,12 +90,13 @@ export default function Menu(props) {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1>Menu Selection</h1>
+        <h1>Order Online</h1>
+        <h2>Thank you for directly supporting Cedars of Lebanon!</h2>
         <p className={styles.description}>
           <b>Please note:</b> when you order online, you are expected to pick up the order at Cedars of Lebanon.
           <br />
           <br />
-          On average, orders typically take 15 minutes to fulfill. When you arrive, please let the cashier know what you ordered.
+          On average, orders take 15 minutes to fulfill. When you arrive, please let the cashier know what you ordered.
         </p>
         <div className={styles.menuContainer}>
           <ul className={styles.menu}>
