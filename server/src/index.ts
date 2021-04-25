@@ -38,7 +38,7 @@ const typeDefs = gql`
   type StripeLineItemResponse {
     title: String
     quantity: Int
-    totalPrice: Int
+    amountTotal: Int
   }
 
   input LineItemInput {
@@ -82,7 +82,7 @@ server.applyMiddleware({ app });
 
 // TODO: specify domain
 const crossOriginOptions = {
-  origin: '*',
+  origin: process.env.DASHBOARD_URL,
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }
