@@ -50,26 +50,34 @@ export default function OrdersList() {
   }
 
   if(loading) {
-    return (<div>
-      <h1>Loading...</h1>
-      <p><b>Note:</b> starting up the website may take a few seconds.</p>
-    </div>);
+    return (
+      <div>
+        <h1>Loading...</h1>
+        <p><b>Note:</b> starting up the website may take a few seconds.</p>
+      </div>
+    );
   }
 
   return (
     <>
+    {/*
       <div className={styles.header}>
-        <div className={styles.controller}>
-          <p><b>Status:</b> {pollStatus ? "Active" : "Inactive"}</p>
-          <button onClick={togglePolling}>Toggle</button>
-        </div>
+        
+          <div className={styles.controller}>
+            <p><b>Status:</b> {pollStatus ? "Active" : "Inactive"}</p>
+            <button onClick={togglePolling}>Toggle</button>
+          </div>
       </div>
+       */}
       <div className={styles.table}>
         <ul className={styles.orders}>
-          {data && data.orders.length == 0 ? <p className={styles.noOrders}>No orders.</p> : data.orders.map(order => 
-            <li key={order.id} className={styles.card}>
-              <Order {...order} />
-            </li>
+          {data && data.orders.length == 0 ? 
+            <p className={styles.noOrders}>No orders.</p> 
+            : 
+            data.orders.map(order => 
+              <li key={order.id} className={styles.card}>
+                <Order {...order} />
+              </li>
           )} 
         </ul>
       </div>
