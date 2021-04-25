@@ -36,8 +36,7 @@ stripe listen --forward-to localhost:4000/v1/payment/complete
 ```
 
 ## Version 0 (Skateboard)
-Accept and view orders from the restaurant site and receive payment.
-Allow customers to buy online from the top 5 most popular menu items.
+Accept and view orders from the restaurant site and receive payments online.
 
 - [x] DB Seeding
 - [x] Nodemon, Typescript, dev setup
@@ -89,12 +88,15 @@ Allow customers to buy online from the top 5 most popular menu items.
 - [x] Ignore Builds Setting (Client and Dashboard)
 - [x] **Priority**: Update menu work flow on production (add items, update prices)
   - [x] Ad-hoc script / `upsert` seeding
+  - [x] Reseed with new menu (with fixed `itemId` matching)
+  - [x] Dataloader Fix (proper response ordering)
 - [ ] Connect Stripe to bank account
 - [ ] Switch over to production API Stripe keys
 - [ ] **Final Action**: publish domains officially (remove Netlify connection)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [ ] Shared types between server and frontend (?)
 - [ ] Align Postgres db to table structure of Stripe
 - [ ] Specify acceptable domains (cross-origin)
 - [ ] `checkoutSessionId` field to `Order` (match `orderId` with `checkoutSessionId`)
