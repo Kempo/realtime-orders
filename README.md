@@ -102,7 +102,7 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
 - [ ] `checkoutSessionId` field to `Order` (match `orderId` with `checkoutSessionId`)
 - [ ] Item descriptions
   - [ ] Column addition (migration)
-  - [ ] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
+  - [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
   - [ ] Update existing items
 - [ ] Menu item pictures (served through CloudFront?)
   - [ ] Column addition (migration)
