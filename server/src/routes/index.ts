@@ -20,41 +20,6 @@ const endpointSecret = process.env.WEBHOOK_SECRET;
 const saveOrder = async (session: Stripe.Checkout.Session) => {
   console.log('Fulfilling order...');
 
-  /*
-  // fetch the Stripe LineItems
-  const lineItems: Stripe.ApiList<Stripe.LineItem> = await stripe.checkout.sessions.listLineItems(session.id);
-
-  // Reduce the Stripe response to the names associated with each order
-  // TODO: fix this, in favor of using a centralized Stripe Product API to handle ids
-  const names: string[] = lineItems.data.reduce((prev: string[], curr) => {
-    return [...prev, curr.description];
-  }, [])
-
-  // Fetch the items that have the same names in the Stripe response
-  const dbIds = await ctx.prisma.item.findMany({
-    where: {
-      title: {
-        in: names
-      }
-    },
-    select: {
-      id: true,
-      title: true
-    }
-  });
-
-  console.log('ids', dbIds);
-
-  const toCreate = lineItems.data.map(stripeItem => {
-    return {
-      quantity: stripeItem.quantity ?? 1,
-      itemId: dbIds.find(el => el.title === stripeItem.description)!.id
-    };
-  });
-
-  console.log(JSON.stringify(toCreate));
-  */
-
   const createPayload = await fulfillOrder(session.id, stripe, ctx);
 
   return ctx.prisma.order.create({
@@ -88,8 +53,6 @@ routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), a
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  console.log('Type: ' + event.type);
-
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
@@ -98,7 +61,7 @@ routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), a
     const res = await saveOrder(session).catch(err => {
 
       // TODO: what if the checkout session is completed, but the order fulfillment fails?
-      console.log('Order fulfillment error \n', err);
+      console.log('Error \n', err);
     });
     console.log('Order saved: \n', res);
   }
