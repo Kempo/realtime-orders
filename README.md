@@ -86,16 +86,17 @@ Accept and view orders from the restaurant site and receive payments online.
 - [x] Client website switchover (add menu page) 
 - [x] Google Analytics (Client)
 - [x] Ignore Builds Setting (Client and Dashboard)
-- [x] **Priority**: Update menu work flow on production (add items, update prices)
+- [x] Update menu work flow on production (add items, update prices)
   - [x] Ad-hoc script / `upsert` seeding
   - [x] Reseed with new menu (with fixed `itemId` matching)
-  - [x] Dataloader Fix (proper response ordering)
+  - [x] Dataloader Fix (proper batch ordering)
 - [ ] Connect Stripe to bank account
 - [ ] Switch over to production API Stripe keys
 - [ ] **Final Action**: publish domains officially (remove Netlify connection)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [ ] Item Categories Migration
 - [ ] Shared types between server and frontend (?)
 - [ ] Align Postgres db to table structure of Stripe
 - [ ] Specify acceptable domains (cross-origin)
