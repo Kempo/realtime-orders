@@ -30,6 +30,7 @@
 
 .main h1 {
   font-size: 3em;
+  font-family: 'Grenoble Serial Bold';
 }
 
 .menuContainer {
@@ -50,4 +51,5 @@
 .description {
   max-width: 550px;
   margin-bottom: 75px;
+  color: #5e5e5e;
 }

@@ -36,7 +36,8 @@
 
   h2 {
     font-style: italic;
-    margin-bottom: 32px;
+    margin: 0px 6px 32px 6px;
+    text-align: center;
   }
 }
 
@@ -87,8 +88,23 @@
   }
 }
 
-.picture {
+.store, .takeout {
   display: flex;
   justify-content: center;
   margin: 0px 0px 64px 0px;
+}
+
+.pictures {
+  margin: 48px 0px 48px 0px;
+
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    .image {
+      margin: 5px;
+    }
+  }
 }
