@@ -80,7 +80,6 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-// TODO: specify domain
 const crossOriginOptions = {
   origin: process.env.DASHBOARD_URL,
   methods: ['GET', 'POST'],
