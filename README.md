@@ -90,8 +90,11 @@ Accept and view orders from the restaurant site and receive payments online.
   - [x] Ad-hoc script / `upsert` seeding
   - [x] Reseed with new menu (with fixed `itemId` matching)
   - [x] Dataloader Fix (proper batch ordering)
-- [ ] Connect Stripe to bank account
-- [ ] Switch over to production API Stripe keys
+- [x] Connect Stripe to bank account
+- [ ] Switch over to production keys
+  - [ ] Heroku Stripe Keys (and webhook)
+  - [ ] Client Site
+- [ ] Switch to official webhook
 - [ ] **Final Action**: publish domains officially (remove Netlify connection)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
