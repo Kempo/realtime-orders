@@ -3,6 +3,15 @@ import Stripe from "stripe";
 import { Context } from "../context";
 import type { CheckoutSessionPayload, PrismaItemWithQuantity } from '../types'; 
 
+/**
+ * 
+ * Converts the client checkout payload into
+ * a preprocessed output for the Stripe API.
+ * 
+ * @param payload 
+ * @param context 
+ * @returns properly formed line items response 
+ */
 export async function convertCheckoutPayloadToStripe(payload: CheckoutSessionPayload[], context: Context) {
   const dbIds = reduceToDatabaseIds(payload);
   const connected = await connectToPrismaItems(context, dbIds);

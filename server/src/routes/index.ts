@@ -1,7 +1,7 @@
 import express from 'express';
 import Stripe from 'stripe';
 import { Context, getContext } from '../context';
-import { fulfillOrder } from '../converters/fulfill-order';
+import { fulfillOrder } from '../converters';
 
 if(!process.env.STRIPE_TEST_KEY || !process.env.WEBHOOK_SECRET) {
   throw new Error('Unable to read environment variables.');
@@ -20,7 +20,7 @@ const endpointSecret = process.env.WEBHOOK_SECRET;
 const saveOrder = async (session: Stripe.Checkout.Session) => {
   console.log('Fulfilling order...');
 
-  const createPayload = await fulfillOrder(session.id, stripe, ctx);
+  const createPayload = await fulfillOrder(session.id, ctx);
 
   return ctx.prisma.order.create({
     data: {
