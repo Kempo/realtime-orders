@@ -35,6 +35,10 @@ If you're testing out Stripe webhooks, be sure to also run:
 stripe listen --forward-to localhost:4000/v1/payment/complete
 ```
 
+## Other commands
+1. To reseed the database: `npx prisma db seed`
+2. To run the ad-hoc script: `npx ts-node ad-hoc.ts`
+
 ## Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payments online.
 
@@ -90,12 +94,17 @@ Accept and view orders from the restaurant site and receive payments online.
   - [x] Ad-hoc script / `upsert` seeding
   - [x] Reseed with new menu (with fixed `itemId` matching)
   - [x] Dataloader Fix (proper batch ordering)
-- [x] Connect Stripe to bank account
-- [ ] Switch over to production keys
-  - [ ] Heroku Stripe Keys (and webhook)
-  - [ ] Client Site
-- [ ] Switch to official webhook
-- [ ] **Final Action**: publish domains officially (remove Netlify connection)
+- [ ] **Final Actions**: 
+  - [x] Connect Stripe to bank account
+  - [x] Add production webhook
+  - [x] Basic tests
+  - [ ] Version push to Heroku 
+  - [ ] Seed production database + clear out existing orders
+  - [ ] Switch over to production keys
+    - [ ] Heroku Stripe Keys
+    - [ ] Vercel Client Environment variables
+  - [ ] Run first transaction (wahoo! 🎉)
+  - [ ] Publish client domain officially (and remove Netlify connection)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
