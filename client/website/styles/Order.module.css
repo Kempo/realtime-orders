@@ -17,6 +17,7 @@
 
 .container .order .summaryTitle {
   text-align: center;
+  font-family: 'Grenoble Serial Bold', sans-serif;
 }
 
 .receipt {
@@ -24,6 +25,10 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
+}
+
+.receipt h2 { 
+  font-family: 'Grenoble Serial Bold', sans-serif;
 }
 
 .receipt table {

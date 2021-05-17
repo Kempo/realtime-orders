@@ -111,22 +111,28 @@ function Success({ order }:{ order: MenuItemType[] }) {
       <div className={styles.receipt}>
         <h2>Order Summary</h2>
         <table>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-          </tr>
-          {
-            order.length > 0 && order.map((el: MenuItemType, i: number) =>  
-              <tr key={i}>
-                <td className={styles.itemName}>{el.quantity}x {el.title}</td>
-                <td className={styles.amountTotal}>{formatter.format(el.amountTotal / 100)}</td>
-              </tr>
-            )
-          }
-          <tr>
-            <td><b>Total:</b></td>
-            <td className={styles.amountTotal}><b>{formatter.format(totalPrice / 100)}</b></td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              order.length > 0 && order.map((el: MenuItemType, i: number) =>  
+                <tr key={i}>
+                  <td className={styles.itemName}>{el.quantity}x {el.title}</td>
+                  <td className={styles.amountTotal}>{formatter.format(el.amountTotal / 100)}</td>
+                </tr>
+              )
+            }
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><b>Total:</b></td>
+              <td className={styles.amountTotal}><b>{formatter.format(totalPrice / 100)}</b></td>
+            </tr>
+          </tfoot>
         </table>
       </div>
       <Instructions />
