@@ -40,7 +40,7 @@ export default function Layout({ children }) {
           </Link>
           <ul>
             <li>
-              <a target="_blank" rel="noopener noreferrer" href="https://d7xe6a0v1wpai.cloudfront.net/Cedars_Takeout%20Menu_FINALJUN5.pdf">
+              <a target="_blank" rel="noopener noreferrer" href="https://d7xe6a0v1wpai.cloudfront.net/TAKEOUT_MENU_REVISED_APR_9TH_2021.pdf">
                 Menu
               </a>
             </li>
