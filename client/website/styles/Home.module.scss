@@ -1,3 +1,7 @@
+$grey: #6d6d6d;
+$main-red: #E14046;
+$backdrop: rgb(249, 249, 249);
+
 @media screen and (max-width: 700px) {
   .about, .contact {
     display: flex;
@@ -46,12 +50,12 @@
 }
 
 .contact {
-  background-color: rgb(249, 249, 249);
+  background-color: $backdrop;
   margin-bottom: 32px;
 
   h1 {
     font-family: "Grenoble Serial Bold", serif;
-    color: #E14046;
+    color: $main-red;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 2.5em;
@@ -59,18 +63,18 @@
 
   p {
     font-size: 1.25em;
-    color:rgb(114, 114, 114);
+    color: $grey;
     line-height: 150%;
   }
 }
 
 .about {
   margin-bottom: 32px;
-  background-color: rgb(249, 249, 249);
+  background-color: $backdrop;
 
   h1 {
     font-family: "Grenoble Serial Bold", serif;
-    color: #E14046;
+    color: $main-red;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 2.5em;
@@ -78,13 +82,10 @@
 
   p {
     font-size: 1.25em;
-    color:#6d6d6d;
+    color:$grey;
     max-width: 500px;
     text-align: left;
     line-height: 125%;
-    b {
-      color: #E14046;
-    }
   }
 }
 

@@ -11,6 +11,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: 300;
+  color: #323232;
 }
 
 main {
@@ -45,6 +46,7 @@ button {
   cursor: pointer;
   border-radius: 3px;
   color: #009B58;
+  transition: 200ms background-color;
 }
 
 button:hover, button:active {

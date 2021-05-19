@@ -105,14 +105,16 @@ Accept and view orders from the restaurant site and receive payments online.
     - [x] Heroku Stripe Keys 
     - [x] Vercel Client Environment variables
   - [x] Run first transaction (wahoo! 🎉)
-  - [ ] Publish client domain officially (and remove Netlify connection)
+  - [x] Publish client domain officially (and remove Netlify connection)
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [ ] Email Confirmation / Receipt
+- [ ] Yelp Reviews on Order page (?)
 - [ ] Item Categories Migration
 - [ ] Shared types between server and frontend (?)
 - [ ] Align Postgres db to table structure of Stripe
-- [ ] Specify acceptable domains (cross-origin)
+- [x] Specify acceptable domains (cross-origin)
 - [ ] `checkoutSessionId` field to `Order` (match `orderId` with `checkoutSessionId`)
 - [ ] Item descriptions
   - [ ] Column addition (migration)
@@ -138,8 +140,8 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
 ## Version 2 (Car)
 End-of-day transaction summary, dev and production environments, speedy and efficient data fetching, service observability
 
+- [ ] Item search
 - [ ] Pricing for Menu Items Migration
-- [ ] Idempotency
 - [ ] Stripe Product/Prices Integration (backend-aligned item IDs)
 - [ ] Websockets Integration (?)
 - [ ] UUID schema migration

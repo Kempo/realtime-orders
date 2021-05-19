@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { loadStripe } from '@stripe/stripe-js'
 import { gql, useMutation } from '@apollo/client'
 import client from '../lib/apolloClient'
-import styles from '../styles/Menu.module.css'
+import styles from '../styles/Menu.module.scss'
 import MenuItem from '../components/MenuItem'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_TEST_STRIPE_KEY);
@@ -91,9 +92,12 @@ export default function Menu(props) {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1>Order Online</h1>
-        <h2>Thank you for directly supporting Cedars of Lebanon!</h2>
+        <div className={styles.businessInfo}>
+          <Image src="/location-sharp.svg" alt="Location Icon" width="18" height="18" />
+          <a href="https://www.google.com/maps/place/Cedars+of+Lebanon/@47.6597139,-122.3134208,19.17z/data=!4m5!3m4!1s0x0:0x91c70c3f32afc6f5!8m2!3d47.6597151!4d-122.3135296" target="_blank" rel="noopener noreferrer">1319 NE 43rd St, Seattle, WA 98105</a>
+        </div>
         <p className={styles.description}>
-          <b>Please note:</b> when you order online, you are expected to pick up the order at Cedars of Lebanon.
+          <b>Note:</b> you are expected to pick up the order at Cedars of Lebanon.
           <br />
           <br />
           On average, orders take 15 minutes to fulfill. When you arrive, please let the cashier know what you ordered.
