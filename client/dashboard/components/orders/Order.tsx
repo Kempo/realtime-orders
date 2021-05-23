@@ -13,7 +13,7 @@ export default function Order({ id, title, lineItems, createdAt }) {
       <br />
       <ul>
         {lineItems.map(lineItem => 
-            <li key={lineItem.id}><p>{lineItem.quantity} {lineItem.item.title}</p></li>)}
+            <li key={lineItem.id}><p><b>{lineItem.quantity}</b> {lineItem.item.title}</p></li>)}
       </ul>
       <br />
       <p className={styles.badge}>

@@ -9,6 +9,14 @@
   border-color: #CCC;
 }
 
+.order ul li p {
+  font-size: 2.5em;
+}
+
+.order ul {
+  list-style-type: none;
+}
+
 .orderNumber {
   color: rgb(135, 135, 135);
 }
@@ -28,10 +36,10 @@
 }
 
 .badge {
-  background-color: #009b58;
+  background-color: #01cb73;
   color: white;
-  border-radius: 1px;
-  padding: 5px;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 0.75rem !important;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
