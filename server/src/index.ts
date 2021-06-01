@@ -27,6 +27,8 @@ const typeDefs = gql`
     id: Int
     title: String
     unitPrice: Int
+    category: String
+    dietary: [String]
   }
 
   type Query {
