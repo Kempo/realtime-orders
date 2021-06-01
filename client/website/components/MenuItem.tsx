@@ -5,7 +5,7 @@ function formatUnitPrice(unitPrice) {
   return formatter.format(unitPrice / 100);
 }
 
-export default function MenuItem({ id, title, unitPrice, onQuantityUpdate }) {
+export default function MenuItem({ id, title, unitPrice, category, onQuantityUpdate }) {
   return (
     <div className={styles.item}>
       <h4>{title}</h4>

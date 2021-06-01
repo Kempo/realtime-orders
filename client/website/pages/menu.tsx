@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { loadStripe } from '@stripe/stripe-js'
 import { gql, useMutation } from '@apollo/client'
@@ -17,6 +17,7 @@ interface MenuItemType {
   id: number;
   title: string;
   unitPrice: number;
+  category: string;
 }
 
 const CREATE_CHECKOUT_MUTATION = gql`
@@ -93,7 +94,7 @@ export default function Menu(props) {
       <main className={styles.main}>
         <h1>Order Online</h1>
         <div className={styles.businessInfo}>
-          <Image src="/location-sharp.svg" alt="Location Icon" width="18" height="18" />
+          <Image src="/location-sharp.svg" alt="Location" width="18" height="18" />
           <a href="https://www.google.com/maps/place/Cedars+of+Lebanon/@47.6597139,-122.3134208,19.17z/data=!4m5!3m4!1s0x0:0x91c70c3f32afc6f5!8m2!3d47.6597151!4d-122.3135296" target="_blank" rel="noopener noreferrer">1319 NE 43rd St, Seattle, WA 98105</a>
         </div>
         <p className={styles.description}>
@@ -103,15 +104,31 @@ export default function Menu(props) {
           On average, orders take 15 minutes to fulfill. When you arrive, please let the cashier know what you ordered.
         </p>
         <div className={styles.menuContainer}>
-          <ul className={styles.menu}>
+            {/*
             {
               props.menu.map((item: MenuItemType, index) => (
                 <li className={styles.listItem} key={`${item.title}-${item.id}`}>
                   <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
                 </li>
               ))
+            }*/}
+            {
+              Object.keys(props.categorized).map(category => (
+                <React.Fragment key={`menu-${category}`}>
+                  <h1 className={styles.categoryTitle}>{category}</h1>
+                  <hr />
+                  <ul className={styles.menuSection}>
+                  {
+                    props.categorized[`${category}`].map(item => (
+                      <li className={styles.listItem} key={`${item.title}-${item.id}`}>
+                        <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
+                      </li>
+                    ))
+                  }
+                  </ul>
+                </React.Fragment>
+              ))
             }
-          </ul>
         </div>
         <button onClick={handleClick}>
           Checkout
@@ -130,13 +147,34 @@ export async function getStaticProps(context) {
             id
             title
             unitPrice
+            category
           }
         }
       `
     }
-  )
+  );
 
-  if (error) {
+  // TODO: fix, fetch fields from server
+  const categorized = {
+    sandwiches: [],
+    salads: [],
+    sides: [],
+    beverages: [],
+    desert: [],
+    specials: []
+  }
+
+  let fieldNotExist = false;
+
+  data.menu.forEach((item: MenuItemType) => {
+    if(categorized[`${item.category.toLowerCase()}`] !== undefined) {
+      categorized[`${item.category.toLowerCase()}`].push(item);
+    }else{
+      fieldNotExist = true;
+    }
+  });
+
+  if (error || (fieldNotExist && process.env.NEXT_PUBLIC_TEST_STRIPE_KEY.indexOf('test') !== -1)) {
     return {
       notFound: true,
     }
@@ -144,7 +182,8 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      ...data
+      ...data,
+      categorized
     },
   }
 }

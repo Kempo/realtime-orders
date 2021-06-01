@@ -5,6 +5,12 @@
   padding: 40px 80px 40px 30px;
   color: black;
   margin: 10px;
+  border-radius: 5px;
+  transition: border-color 100ms, background-color 100ms;
+}
+
+.item:hover {
+  border-color: rgb(108, 108, 108);
 }
 
 .item .description {
