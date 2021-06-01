@@ -1,14 +1,5 @@
-
-// const { PrismaClient } = require('@prisma/client');
-
-const prisma = null; /* new PrismaClient({
-  datasources: {
-    db: {
-      provider: "sqlite",
-      url: "file:./test.db"
-    }
-  }
-});*/
+// Unused.
+const prisma = null;
 
 describe("cascading database deletes", () => {
   it.skip("should delete line items when an order is deleted", async () => {
