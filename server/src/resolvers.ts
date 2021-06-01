@@ -29,11 +29,14 @@ export const resolvers = {
     },
     menu: async (_, __, context: Context, ___) => {
       // TODO: pagination
-      const menuItems = await context.prisma.item.findMany()
-                          .catch(err => {
-                            console.log(err);
-                            throw new ApolloError('Unable to query database');
-                          });
+      const menuItems = await context.prisma.item.findMany({
+        orderBy: {
+          id: 'asc'
+        }
+      }).catch(err => {
+        console.log(err);
+        throw new ApolloError('Unable to query database');
+      });
 
       return menuItems;
     }
