@@ -35,10 +35,12 @@ If you're testing out Stripe webhooks, be sure to also run:
 stripe listen --forward-to localhost:4000/v1/payment/complete
 ```
 
-## Other commands
-1. To reseed the database (in SSH): `npx prisma db seed --preview-feature`
-2. To run the ad-hoc script: `npx ts-node ad-hoc.ts`
+## Migration, Reseeding, and ad-hoc changes
 
+1. To reseed the database: `npx prisma db seed --preview-feature`
+2. To run the ad-hoc script: `npx ts-node ad-hoc.ts`
+3. Migrations are auto-applied during production deployment
+  - To run migrations locally, `npx prisma migrate dev --preview-feature`
 ## Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payments online.
 
@@ -94,7 +96,7 @@ Accept and view orders from the restaurant site and receive payments online.
   - [x] Ad-hoc script / `upsert` seeding
   - [x] Reseed with new menu (with fixed `itemId` matching)
   - [x] Dataloader Fix (proper batch ordering)
-- [ ] **Final Actions**: 
+- [x] **Final Actions**: 
   - [x] Connect Stripe to bank account
   - [x] Add production webhook
   - [x] Basic tests
@@ -109,9 +111,12 @@ Accept and view orders from the restaurant site and receive payments online.
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
-- [ ] Email Confirmation / Receipt
+- [ ] Quantity Selection (disable manual input)
+- [ ] Update Prisma
+- [ ] Email Receipt
 - [ ] Yelp Reviews on Order page (?)
 - [ ] Item Categories Migration
+- [ ] Dietary Field Migration
 - [ ] Shared types between server and frontend (?)
 - [ ] Align Postgres db to table structure of Stripe
 - [x] Specify acceptable domains (cross-origin)
@@ -153,6 +158,13 @@ And beyond...
 
 ### Miscellaneous
 - [x] `.gitignore` for all `node_modules`
+
+If dealing with simultaneous client-server changes:
+1. Deploy server first (`git commit` and `git push heroku`)
+2. Update core seeds after migration is applied
+2. Verify server changes
+3. Deploy client (`git push master`)
+4. Verify client changes
 
 ### To address
 1. How should a restaurant owner update their menu?
