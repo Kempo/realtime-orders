@@ -115,7 +115,7 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
 - [ ] Update Prisma
 - [ ] Email Receipt
 - [ ] Yelp Reviews on Order page (?)
-- [ ] Item Categories Migration
+- [x] Item Categories Migration
 - [ ] Dietary Field Migration
 - [ ] Shared types between server and frontend (?)
 - [ ] Align Postgres db to table structure of Stripe
