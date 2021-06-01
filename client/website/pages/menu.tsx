@@ -6,8 +6,10 @@ import client from '../lib/apolloClient'
 import styles from '../styles/Menu.module.scss'
 import MenuItem from '../components/MenuItem'
 
+// TODO: load Stripe via library?
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_TEST_STRIPE_KEY);
 
+// TODO: organize types between server/client
 interface LineItem {
   itemId: number;
   quantity: number;
