@@ -173,7 +173,9 @@ export async function getStaticProps(context) {
       fieldNotExist = true;
     }
   });
-
+  
+  // If there's an HTTP error OR if there's a field error and it's a test environment
+  // then throw notFound status.
   if (error || (fieldNotExist && process.env.NEXT_PUBLIC_TEST_STRIPE_KEY.indexOf('test') !== -1)) {
     return {
       notFound: true,
