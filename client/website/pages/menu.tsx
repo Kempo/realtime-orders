@@ -99,12 +99,20 @@ export default function Menu(props) {
           <Image src="/location-sharp.svg" alt="Location" width="18" height="18" />
           <a href="https://www.google.com/maps/place/Cedars+of+Lebanon/@47.6597139,-122.3134208,19.17z/data=!4m5!3m4!1s0x0:0x91c70c3f32afc6f5!8m2!3d47.6597151!4d-122.3135296" target="_blank" rel="noopener noreferrer">1319 NE 43rd St, Seattle, WA 98105</a>
         </div>
-        <p className={styles.description}>
-          <b>Note:</b> you are expected to pick up the order at Cedars of Lebanon.
+        <div className={styles.subhero}>
+          <div className={styles.orderType}>
+            <span className={styles.badge}>Pickup</span>
+          </div>
           <br />
-          <br />
-          On average, orders take 15 minutes to fulfill. When you arrive, please let the cashier know what you ordered.
-        </p>
+          <p>Estimated Time: ~<b>15 - 20</b> minutes</p>
+        </div>
+        <div className={styles.sectionNavigation}>
+          {
+            Object.keys(props.categorized).map(category => (
+              <a key={category} className={styles.sectionLink} href={`#${category}`}>{category}</a>
+            ))
+          }
+        </div>
         <div className={styles.menuContainer}>
             {/*
             {
@@ -116,7 +124,7 @@ export default function Menu(props) {
             }*/}
             {
               Object.keys(props.categorized).map(category => (
-                <React.Fragment key={`menu-${category}`}>
+                <div id={`${category}`} key={`menu-${category}`}>
                   <h1 className={styles.categoryTitle}>{category}</h1>
                   <hr />
                   <ul className={styles.menuSection}>
@@ -128,7 +136,7 @@ export default function Menu(props) {
                     ))
                   }
                   </ul>
-                </React.Fragment>
+                </div>
               ))
             }
         </div>

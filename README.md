@@ -111,21 +111,25 @@ Accept and view orders from the restaurant site and receive payments online.
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
-- [x] Price & Taxes Update
-- [ ] Quantity Selection (disable manual input)
+- [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
+- [ ] Menu Interface
+  - [x] Prices & Tax update
+  - [ ] Dietary labels
+  - [x] Section Shortcuts
+  - [ ] Quantity Selection (disable manual input)
+  - [x] Item Categories Migration
+  - [x] Dietary Field Migration
+  - [ ] Item descriptions
+    - [ ] Description Migration
+    - [ ] Update existing items
+- [ ] Order Dashboard sound notifications
 - [ ] Update Prisma
 - [ ] Email Receipt
 - [ ] Yelp Reviews on Order page (?)
-- [x] Item Categories Migration
-- [x] Dietary Field Migration
 - [ ] Shared types between server and frontend (?)
 - [ ] Align Postgres db to table structure of Stripe
 - [x] Specify acceptable domains (cross-origin)
 - [ ] `checkoutSessionId` field to `Order` (match `orderId` with `checkoutSessionId`)
-- [ ] Item descriptions
-  - [ ] Column addition (migration)
-  - [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
-  - [ ] Update existing items
 - [ ] Menu item pictures (served through CloudFront?)
   - [ ] Column addition (migration)
   - [ ] File serving
