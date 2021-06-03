@@ -111,12 +111,13 @@ Accept and view orders from the restaurant site and receive payments online.
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [x] Price & Taxes Update
 - [ ] Quantity Selection (disable manual input)
 - [ ] Update Prisma
 - [ ] Email Receipt
 - [ ] Yelp Reviews on Order page (?)
 - [x] Item Categories Migration
-- [ ] Dietary Field Migration
+- [x] Dietary Field Migration
 - [ ] Shared types between server and frontend (?)
 - [ ] Align Postgres db to table structure of Stripe
 - [x] Specify acceptable domains (cross-origin)
