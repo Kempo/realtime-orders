@@ -70,10 +70,10 @@ footer p {
 }
 
 table, th, td {
-  border: 1px solid rgb(144 144 144);;
+  border: 1px solid rgb(162, 162, 162);;
   border-collapse: collapse;
 }
 
 th, td {
-  padding: 15px 10px;
+  padding: 25px 15px;
 }

@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container .order {
+  width: 100%;
+  max-width: 800px;
+  margin: 15px 15px 80px 15px;
+}
+
+.container p {
+  color: rgb(45, 45, 45);
+}
+
+.container .order .logo {
+  margin: auto;
+  width: 250px;
+}
+
+.container .order .summaryTitle {
+  text-align: center;
+  font-family: 'Grenoble Serial Bold', sans-serif;
+}
+
+.restaurantNote {
+  text-align: center;
+  line-height: 150%;
+  color: rgb(87, 87, 87);
+}
+
+.receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+
+
+  h2 { 
+    font-family: 'Grenoble Serial Bold', sans-serif;
+  }
+
+  table {
+    max-width: 510px;
+    width: 75%;
+    min-width: 280px;
+  }
+
+  .itemName {
+    text-align: left;
+
+    .quantity {
+      margin-right: 2px;
+      font-size: 1.15em;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  }
+
+  .amountTotal {
+    text-align: right;
+  }
+}
+
+.instructions {
+  h1 {
+    letter-spacing: 1px;
+    font-family: 'Grenoble Serial Bold', serif;
+  }
+
+  .contactRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    a {
+      margin-left: 5px;
+    }
+  }
+}

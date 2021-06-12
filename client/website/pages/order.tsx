@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { gql } from '@apollo/client';
-import styles from '../styles/Order.module.css';
+import styles from '../styles/Order.module.scss';
 import client from '../lib/apolloClient';
 import formatter from '../lib/dollarFormatter';
 
@@ -107,7 +107,7 @@ function Success({ order }:{ order: MenuItemType[] }) {
     <React.Fragment>
       <h1 className={styles.summaryTitle}>Thank you for supporting!</h1>
       <hr />
-      <p>Orders take on average about 15 minutes to complete. <br /> Please come pick it up when you're ready. </p>
+      <p className={styles.restaurantNote}>We <b>sincerely</b> appreciate you taking the time to order from us. <br /> Instructions for picking up your order can be found below.</p>
       <div className={styles.receipt}>
         <h2>Order Summary</h2>
         <table>
@@ -121,7 +121,7 @@ function Success({ order }:{ order: MenuItemType[] }) {
             {
               order.length > 0 && order.map((el: MenuItemType, i: number) =>  
                 <tr key={i}>
-                  <td className={styles.itemName}>{el.quantity}x {el.title}</td>
+                  <td className={styles.itemName}><span className={styles.quantity}><b>{el.quantity}</b></span> {el.title}</td>
                   <td className={styles.amountTotal}>{formatter.format(el.amountTotal / 100)}</td>
                 </tr>
               )
@@ -143,7 +143,7 @@ function Success({ order }:{ order: MenuItemType[] }) {
 function Instructions() {
   return (
     <div className={styles.instructions}>
-      <h2>Instructions:</h2>
+      <h1>Instructions:</h1>
       <p>Orders are approximately finished in <b>15</b> minutes. <br /> <br /> Please pick up your order at Cedars of Lebanon.</p> 
       <div className={styles.contactRow}>
         <Image src="/location-sharp.svg" alt="Location" width="18" height="18" />
