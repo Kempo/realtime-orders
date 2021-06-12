@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import { useQuery, gql, NetworkStatus } from '@apollo/client'
 import Order from './Order';
-import styles from '../../styles/List.module.css'
+import styles from '../../styles/List.module.scss'
 
 const ORDERS = gql`
   query fetchOrders {
@@ -22,53 +22,55 @@ const ORDERS = gql`
 
 const INTERVAL = 3000;
 
+const playNotification = () => {
+  const audio = new Audio('notify_order.mp3');
+  audio.play();
+};
+
 export default function OrdersList() {
 
-  const { loading, error, data, networkStatus, startPolling, stopPolling } = useQuery(ORDERS, {
-    pollInterval: INTERVAL
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const { previousData, error, data, networkStatus } = useQuery(ORDERS, {
+    pollInterval: INTERVAL,
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (currentData) => {
+      // Avoid object equality by comparing lengths!
+       if(previousData && currentData.orders.length !== previousData.orders.length) {
+         playNotification();
+       }
+    }
   });
 
-  const [pollStatus, setPolling] = useState(true);
-
-  const togglePolling = () => {
-    if(pollStatus) {
-      stopPolling();
-    }else{
-      startPolling(INTERVAL);
+  const handleClick = () => {
+    if(modalRef) {
+      // Hide the modal and voila!
+      modalRef.current.style.display = 'none';
     }
-
-    setPolling(!pollStatus);
   }
 
   if(error || networkStatus === NetworkStatus.error) {
     return (
       <div>
-        <p>Error! Please try refreshing the web page.</p>
-        <p>If this keeps occurring, please call/text {process.env.NEXT_PUBLIC_PHONE_NUMBER}.</p>
+        <h1>Error! Server is not responding.</h1>
+        <p>Please wait a minute or so. If this problem continues, please call/text {process.env.NEXT_PUBLIC_PHONE_NUMBER}.</p>
       </div>
     );
   }
 
-  if(loading) {
+  // If the query hasn't run before and is now running
+  if(networkStatus === NetworkStatus.loading) {
     return (
       <div>
-        <h1>Loading...</h1>
-        <p><b>Note:</b> starting up the website may take a few seconds.</p>
+        <h1>Starting up...</h1>
+        <p>Please wait for a few minutes or so.</p>
+        <p>If this takes longer than a few minutes, call/text {process.env.NEXT_PUBLIC_PHONE_NUMBER}. </p>
       </div>
     );
   }
 
   return (
-    <>
-    {/*
-      <div className={styles.header}>
-        
-          <div className={styles.controller}>
-            <p><b>Status:</b> {pollStatus ? "Active" : "Inactive"}</p>
-            <button onClick={togglePolling}>Toggle</button>
-          </div>
-      </div>
-       */}
+    <React.Fragment>
       <div className={styles.table}>
         <ul className={styles.orders}>
           {data && data.orders.length == 0 ? 
@@ -81,6 +83,13 @@ export default function OrdersList() {
           )} 
         </ul>
       </div>
-    </>
+      <div ref={modalRef} className={styles.modal}>
+        <div className={styles.content}>
+          <h1>Turn On Sound</h1>
+          <p>Please turn on sound so you can receive alerts with new orders by clicking <b>OK</b>.</p>
+          <button onClick={handleClick}><b>OK</b></button>
+        </div>
+      </div>
+    </React.Fragment>
   )
 }
