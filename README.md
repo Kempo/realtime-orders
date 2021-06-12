@@ -111,6 +111,7 @@ Accept and view orders from the restaurant site and receive payments online.
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [ ] New order notification
 - [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
 - [ ] Menu Interface
   - [x] Prices & Tax update
@@ -122,7 +123,6 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
   - [ ] Item descriptions
     - [ ] Description Migration
     - [ ] Update existing items
-- [ ] Order Dashboard sound notifications
 - [ ] Update Prisma
 - [ ] Email Receipt
 - [ ] Yelp Reviews on Order page (?)
