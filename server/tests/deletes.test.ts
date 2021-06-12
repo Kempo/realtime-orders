@@ -1,5 +1,5 @@
 // Unused.
-const prisma = null;
+const prisma: any = null;
 
 describe("cascading database deletes", () => {
   it.skip("should delete line items when an order is deleted", async () => {

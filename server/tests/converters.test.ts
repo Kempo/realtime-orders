@@ -225,4 +225,14 @@ describe('order fulfillment', () => {
 
   });
 
-})
+});
+
+describe('checkout session', () => {
+  it.skip('should return empty response if menu items are unmatched between Stripe and Prisma', () => {
+
+  });
+
+  it.skip('should return empty response if for some reason ids become morphed during conversion', () => {
+    
+  });
+});
