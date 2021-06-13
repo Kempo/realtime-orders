@@ -96,12 +96,12 @@ export default function Menu(props) {
       <main className={styles.main}>
         <h1>Order Online</h1>
         <div className={styles.businessInfo}>
-          <Image src="/location-sharp.svg" alt="Location" width="18" height="18" />
+          <Image src="/icons/location-sharp.svg" alt="Location" width="18" height="18" />
           <a href="https://www.google.com/maps/place/Cedars+of+Lebanon/@47.6597139,-122.3134208,19.17z/data=!4m5!3m4!1s0x0:0x91c70c3f32afc6f5!8m2!3d47.6597151!4d-122.3135296" target="_blank" rel="noopener noreferrer">1319 NE 43rd St, Seattle, WA 98105</a>
         </div>
         <div className={styles.subhero}>
           <div className={styles.orderType}>
-            <span className={styles.badge}>Pickup</span>
+            <span className={styles.badge}>Pickup Only</span>
           </div>
           <br />
           <p>Estimated Time: ~<b>15 - 20</b> minutes</p>
@@ -113,15 +113,11 @@ export default function Menu(props) {
             ))
           }
         </div>
+        <p>    
+            <Image src="/icons/vegetarian.svg" alt="Vegetarian" width="14" height="14" />
+            {` `} - Vegetarian
+        </p>
         <div className={styles.menuContainer}>
-            {/*
-            {
-              props.menu.map((item: MenuItemType, index) => (
-                <li className={styles.listItem} key={`${item.title}-${item.id}`}>
-                  <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
-                </li>
-              ))
-            }*/}
             {
               Object.keys(props.categorized).map(category => (
                 <div id={`${category}`} key={`menu-${category}`}>
@@ -158,6 +154,7 @@ export async function getStaticProps(context) {
             title
             unitPrice
             category
+            dietary
           }
         }
       `
