@@ -111,11 +111,11 @@ Accept and view orders from the restaurant site and receive payments online.
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
-- [ ] New order notification
+- [x] New order notification
 - [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
 - [ ] Menu Interface
   - [x] Prices & Tax update
-  - [ ] Dietary labels
+  - [x] Dietary labels
   - [x] Section Shortcuts
   - [ ] Quantity Selection (disable manual input)
   - [x] Item Categories Migration
