@@ -104,7 +104,7 @@ export default function Menu(props) {
             <span className={styles.badge}>Pickup Only</span>
           </div>
           <br />
-          <p>Estimated Time: ~<b>15 - 20</b> minutes</p>
+          <p>Estimated Time: <b>15</b> minutes</p>
         </div>
         <div className={styles.sectionNavigation}>
           {
