@@ -15,8 +15,11 @@ export default function Layout({ children }) {
         <meta property="og:image" content="https://cedarsoflebanonuw.com/takeout.jpeg" />
         <meta property="og:url" content="https://cedarsoflebanonuw.com/" />
         <meta property="og:title" content="Cedars of Lebanon | Seattle's Best Gyro and Falafels" />
-        <meta property="og:description" content="Cedars of Lebanon serves the best gyros, falafels, and shawarmas in Seattle. We are family-run since 1976 and do takeout and dine-in everyday except Sunday." />
+        <meta property="og:description" content="Cedars of Lebanon serves the best gyros, falafels, and shawarmas in UW. We are family-run since 1976 and do takeout and dine-in everyday except Sunday." />
+        <meta name="description" content="Cedars of Lebanon serves the best gyros, falafels, and shawarmas in UW. We are family-run since 1976 and do takeout and dine-in everyday except Sunday." />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="keywords" content="gyros uw, best gyros uw, falafels uw, lebanese food" />
+        <meta name="author" content="Aaron Chen" />
         <link rel="icon" href="/favicon.png" />
       </Head>
       <header>
