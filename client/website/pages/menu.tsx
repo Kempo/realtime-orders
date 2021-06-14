@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { gql, useMutation } from '@apollo/client'
 import client from '../lib/apolloClient'
 import styles from '../styles/Menu.module.scss'
-import MenuItem from '../components/MenuItem'
+import ItemSelection from '../components/ItemSelection'
 
 // TODO: load Stripe via library?
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_TEST_STRIPE_KEY);
@@ -113,10 +113,10 @@ export default function Menu(props) {
             ))
           }
         </div>
-        <p>    
-            <Image src="/icons/vegetarian.svg" alt="Vegetarian" width="14" height="14" />
-            {` `} - Vegetarian
-        </p>
+        <span>
+          <img src="/icons/vegetarian.svg" alt="Vegetarian Icon" width="14" height="14"/>
+          {` `} - Vegetarian
+        </span>
         <div className={styles.menuContainer}>
             {
               Object.keys(props.categorized).map(category => (
@@ -127,14 +127,14 @@ export default function Menu(props) {
                   {
                     props.categorized[`${category}`].map(item => (
                       <li className={styles.listItem} key={`${item.title}-${item.id}`}>
-                        <MenuItem {...item} onQuantityUpdate={handleQuantityUpdate} />
+                        <ItemSelection {...item} onQuantityUpdate={handleQuantityUpdate} />
                       </li>
                     ))
                   }
                   </ul>
                 </div>
               ))
-            }
+              }
         </div>
         <button onClick={handleClick}>
           Checkout

@@ -1,0 +1,28 @@
+.item {
+  border-color: rgb(232, 232, 232);
+  border-width: 1px;
+  border-style: solid;
+  padding: 40px 80px 40px 30px;
+  color: black;
+  margin: 10px;
+  border-radius: 5px;
+  transition: border-color 100ms, background-color 100ms;
+
+  &:hover {
+    border-color: rgb(108, 108, 108);
+  }
+
+  .description {
+    color: rgb(123, 123, 123);
+  }
+
+  .selection {
+    .quantityInput {
+      width: 75px;
+    }
+
+    label {
+      margin-right: 6px;
+    }
+  }
+}
