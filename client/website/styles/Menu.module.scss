@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 64px;
+  color: rgb(26, 31, 54);
 }
 
 @media screen and (max-width: 700px) {
@@ -95,6 +96,12 @@
         text-transform: uppercase;
       }
     }
+  }
+
+  .disclaimer {
+    align-self: flex-start;
+    margin-left: 10px;
+    margin-top: 24px;
   }
 
   .sectionNavigation {

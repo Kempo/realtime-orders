@@ -44,22 +44,30 @@ export default function Menu(props) {
     const stripe = await stripePromise;
 
     if(cart.length > 0) {
-      const { data } = await createCheckoutSession({
+      const response = await createCheckoutSession({
         variables: {
           lineItems: cart
         }
+      }).catch(err => {
+        console.log(err);
+
+        return {
+          data: null
+        }
       });
-  
-      // When the customer clicks on the button, redirect them to Checkout.
-      const result = await stripe.redirectToCheckout({
-        sessionId: data.createCheckoutSession.sessionId
-      });
-  
-      if (result.error) {
-        console.log(result.error.message);
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer
-        // using `result.error.message`.
+
+      if(response.data) {
+        // When the customer clicks on the button, redirect them to Checkout.
+        const result = await stripe.redirectToCheckout({
+          sessionId: response.data.createCheckoutSession.sessionId
+        });
+    
+        if (result.error) {
+          console.log(result.error.message);
+          // If `redirectToCheckout` fails due to a browser or network
+          // error, display the localized error message to your customer
+          // using `result.error.message`.
+        }
       }
     }else{
       alert('Please select a dish to order from the menu!');
@@ -104,7 +112,7 @@ export default function Menu(props) {
             <span className={styles.badge}>Pickup Only</span>
           </div>
           <br />
-          <p>Estimated Time: <b>15</b> minutes</p>
+          <p>Estimated Time: <b>15 minutes</b></p>
         </div>
         <div className={styles.sectionNavigation}>
           {
@@ -117,6 +125,13 @@ export default function Menu(props) {
           <img src="/icons/vegetarian.svg" alt="Vegetarian Icon" width="14" height="14"/>
           {` `} - Vegetarian
         </span>
+        <div className={styles.disclaimer}>
+          <h3>Thank you for supporting us.</h3>
+          <p>
+            For orders larger than 10 items or for catering, please call us at  <a href="tel:+12066327708"><b>(206) 632-7708</b></a>.
+          </p>
+          <p>Customers are expected to <b>pick up</b> their order.</p>
+        </div>
         <div className={styles.menuContainer}>
             {
               Object.keys(props.categorized).map(category => (

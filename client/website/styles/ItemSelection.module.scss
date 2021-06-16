@@ -1,9 +1,31 @@
+@media screen and (min-width: 700px) {
+  .item {
+    .title {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1em;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .item {
+    .title {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      font-size: 1em;
+    }
+  }
+}
+
 .item {
   border-color: rgb(232, 232, 232);
   border-width: 1px;
   border-style: solid;
-  padding: 40px 80px 40px 30px;
-  color: black;
+  padding: 10px 20px 30px 20px;
+  color: rgb(26, 31, 54);
   margin: 10px;
   border-radius: 5px;
   transition: border-color 100ms, background-color 100ms;
@@ -16,13 +38,56 @@
     color: rgb(123, 123, 123);
   }
 
+  .title {
+    display: flex;
+
+    h4 {
+      font-weight: 500;
+    }
+
+    h4, p {
+      display: inline;
+    }
+
+    .price {
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+    }
+
+    margin-bottom: 12px;
+  }
+
   .selection {
     .quantityInput {
-      width: 75px;
+      width: 50px;
+      margin: 0px 8px;
+      font-size: 1.25em;
+
+      border-style: solid;
+      border-color: rgb(232, 232, 232);
+      border-width: 1px;
+      border-radius: 5px;
+      padding: 4px 8px 6px 8px;
+      text-align: center;
+
+      color: rgb(26, 31, 54);
+
+      &:out-of-range {
+        background-color: rgb(255, 140, 140);
+      }
     }
 
     label {
       margin-right: 6px;
+    }
+
+    button {
+      border-radius: 5px;
+      padding: 5px 16px;
+      font-size: 1.25em;
+      font-weight: bold;
+      border-width: 1px;
+
+      font-family: 'Courier New', Courier, monospace;
     }
   }
 }
