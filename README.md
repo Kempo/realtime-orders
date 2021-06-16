@@ -112,13 +112,15 @@ Accept and view orders from the restaurant site and receive payments online.
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
 - [x] New order notification
+- [ ] "Most Popular" items
 - [ ] Sticky main header
 - [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
 - [ ] Menu Interface
   - [x] Prices & Tax update
   - [x] Dietary labels
   - [x] Section Shortcuts
-  - [ ] Quantity Selection (disable manual input)
+  - [x] Quantity Selection Buttons
+  - [ ] Large item orders handling status
   - [x] Item Categories Migration
   - [x] Dietary Field Migration
   - [ ] Item descriptions
