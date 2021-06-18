@@ -22,6 +22,8 @@ interface MenuItemType {
   category: string;
 }
 
+const STARRED = [1, 15, 17, 11]
+
 const CREATE_CHECKOUT_MUTATION = gql`
   mutation CreateCheckout($lineItems: [LineItemInput]) {
     createCheckoutSession(input: {
@@ -124,6 +126,8 @@ export default function Menu(props) {
         <span>
           <img src="/icons/vegetarian.svg" alt="Vegetarian Icon" width="14" height="14"/>
           {` `} - Vegetarian
+          <br />
+          ⭐ - <b>Most Popular</b>
         </span>
         <div className={styles.disclaimer}>
           <h3>Thank you for supporting us.</h3>
@@ -142,7 +146,7 @@ export default function Menu(props) {
                   {
                     props.categorized[`${category}`].map(item => (
                       <li className={styles.listItem} key={`${item.title}-${item.id}`}>
-                        <ItemSelection {...item} onQuantityUpdate={handleQuantityUpdate} />
+                        <ItemSelection {...item} onQuantityUpdate={handleQuantityUpdate} isStarred={STARRED.includes(item.id)} />
                       </li>
                     ))
                   }
