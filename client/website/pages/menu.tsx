@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { loadStripe } from '@stripe/stripe-js'
 import { gql, useMutation } from '@apollo/client'
 import client from '../lib/apolloClient'
+import { handleEvent } from '../lib/gtag'
 import styles from '../styles/Menu.module.scss'
 import ItemSelection from '../components/ItemSelection'
 
@@ -42,6 +43,8 @@ export default function Menu(props) {
   });
 
   async function handleClick(_) {
+    handleEvent('begin_checkout', 'Checkout Button');
+
     // TODO: refactor out into singleton
     const stripe = await stripePromise;
 
@@ -78,6 +81,8 @@ export default function Menu(props) {
 
   function handleQuantityUpdate(itemId) {
     return (event) => {
+      handleEvent('update_cart', 'Quantity Buttons');
+
       const quantity: number = parseInt(event.target.value);
 
       const isTracked = cart.some(item => item.itemId === itemId);
