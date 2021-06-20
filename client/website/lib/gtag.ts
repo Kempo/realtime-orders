@@ -5,6 +5,5 @@ export function handleEvent(category, label) {
     eventCategory: category,
     eventAction: 'click',
     eventLabel: label,
-    transport: 'beacon'
   });
 }
