@@ -3,9 +3,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import hours from '../lib/restaurantDetails.json';
 import Contact from '../components/Contact';
+import { handleEvent } from '../lib/gtag';
 import styles from '../styles/Layout.module.scss';
 
 export default function Layout({ children }) {
+
+  function handleNavigation(page, action) {
+    handleEvent({
+      category: 'navigation',
+      action,
+      label: page,
+    });
+  }
+
   return (
     <div className={styles.layout}>
       <Head>
@@ -42,19 +52,19 @@ export default function Layout({ children }) {
             </a>
           </Link>
           <ul>
-            <li>
+            <li onClick={() => handleNavigation('Menu PDF', 'navigate_menu')}>
               <a target="_blank" rel="noopener noreferrer" href="https://d7xe6a0v1wpai.cloudfront.net/TAKEOUT_MENU_REVISED_APR_9TH_2021.pdf">
                 Menu
               </a>
             </li>
-            <li>
+            <li onClick={() => handleNavigation('Online Orders', 'navigate_orders')}>
               <Link href="/menu">
                 <a>
                   Order
                 </a>
               </Link>
             </li> 
-            <li>
+            <li onClick={() => handleNavigation('Contact', 'navigate_contact')}>
               <Link href="/#contact">
                 <a>
                   Contact

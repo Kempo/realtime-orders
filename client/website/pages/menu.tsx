@@ -43,7 +43,11 @@ export default function Menu(props) {
   });
 
   async function handleClick(_) {
-    handleEvent('begin_checkout', 'Checkout Button');
+    handleEvent({
+      category: 'checkout',
+      action: 'start_checkout',
+      value: cart.length
+    });
 
     // TODO: refactor out into singleton
     const stripe = await stripePromise;
@@ -81,9 +85,14 @@ export default function Menu(props) {
 
   function handleQuantityUpdate(itemId) {
     return (event) => {
-      handleEvent('update_cart', 'Quantity Buttons');
-
       const quantity: number = parseInt(event.target.value);
+
+      handleEvent({
+        category: 'checkout',
+        action: 'update_quantity',
+        label: itemId,
+        value: quantity
+      });
 
       const isTracked = cart.some(item => item.itemId === itemId);
 
