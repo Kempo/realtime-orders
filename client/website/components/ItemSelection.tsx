@@ -39,6 +39,7 @@ export default function ItemSelection({ id, title, unitPrice, dietary, onQuantit
         <h4>{title} {dietary.length > 0 && <VegetarianIcon />} {isStarred && `⭐`}</h4>
         <p className={styles.price}>{formatUnitPrice(unitPrice)}</p>
       </div>
+      <p>Quantity:</p>
       <div className={styles.selection}>
         <button onClick={handleDecreaseQuantity}>-</button>
         <input ref={inputEl} className={styles.quantityInput} type="number" id={`${id}-quantity`} min={0} max={10} step={1} defaultValue={0} onChange={onQuantityUpdate(id)} />
