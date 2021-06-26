@@ -12,6 +12,7 @@ const typeDefs = gql`
   type Order {
     id: Int
     isReady: Boolean
+    totalPrice: Int
     createdAt: String 
     lineItems: [LineItem]
     title: String

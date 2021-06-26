@@ -10,17 +10,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// The order details
 model Order {
   id        Int        @id @default(autoincrement())
+  totalPrice Int?
   title     String?
   createdAt DateTime   @default(now())
   isReady   Boolean    @default(false)
   lineItems LineItem[]
 }
 
-// The static menu item 
-// (unitPrice refers to the price of the item at the lowest denomination ie. cents)
 model Item {
   id       Int        @id @default(autoincrement())
   title    String     @unique
