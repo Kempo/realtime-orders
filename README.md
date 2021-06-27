@@ -37,10 +37,10 @@ stripe listen --forward-to localhost:4000/v1/payment/complete
 
 ## Migration, Reseeding, and ad-hoc changes
 
-1. To reseed the database: `npx prisma db seed --preview-feature`
+1. To reseed the database: `npx prisma db seed`
 2. To run the ad-hoc script: `npx ts-node ad-hoc.ts`
 3. Migrations are auto-applied during production deployment
-  - To run migrations locally, `npx prisma migrate dev --preview-feature`
+  - To run migrations locally, `npx prisma migrate dev`
 ## Version 0 (Skateboard)
 Accept and view orders from the restaurant site and receive payments online.
 
@@ -111,9 +111,13 @@ Accept and view orders from the restaurant site and receive payments online.
 ## Version 1 (Bicycle)
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
+- [x] Event notifications on Checkout
+- [ ] Prices in Dashboard
+  - [x] `totalPrice` column migration
+  - [ ] Non-null migration revert
+  - [ ] Setup `totalPrice` integration on order creation
 - [x] New order notification
-- [ ] "Most Popular" items
-- [ ] Sticky main header
+- [x] "Most Popular" items
 - [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
 - [ ] Menu Interface
   - [x] Prices & Tax update
@@ -126,7 +130,8 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
   - [ ] Item descriptions
     - [ ] Description Migration
     - [ ] Update existing items
-- [ ] Update Prisma
+- [x] Update Prisma
+- [x] Ad-hoc scripts re-organize
 - [ ] Email Receipt
 - [ ] Yelp Reviews on Order page (?)
 - [ ] Shared types between server and frontend (?)
@@ -147,7 +152,7 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
      - [ ] Sidebar interface and main view
      - [ ] Update Order status
   - [ ] Checkout flow (customer-facing)
-    - [ ] Include all menu items
+    - [x] Include all menu items
     - [ ] 5 - 10 pictures included
 
 ## Version 2 (Car)
@@ -174,10 +179,22 @@ If dealing with simultaneous client-server changes:
 3. Deploy client (`git push master`)
 4. Verify client changes
 
+If working on a non-nullable column migration:
+1. Add the column as optional or set a default value to it (migration)
+2. Modify the ad-hoc script to update values
+3. Run it locally
+4. Confirm changes and then deploy to server
+5. Run script on production
+5. Revert the column back with another migration
+6. Run it locally 
+7. Deploy after verification
+
 ### To address
-1. How should a restaurant owner update their menu?
-- This includes prices, new menu items, and deleting old ones
-2. Multi-restaurant integration
-3. Next.js API in-house routes vs. separate server-client architecture
+1. Multi-restaurant integration
+2. Next.js API in-house routes vs. separate server-client architecture
 - Related: hefty, opaque Apollo client implementation for client-side fetching
-4. Stripe and Prisma model misalignment (eg. line items and `StripeLineItemResponse` type)
+3. Stripe and Prisma model misalignment (eg. line items and `StripeLineItemResponse` type)
+
+### Answered
+1. How should a restaurant owner update their menu?
+- Manual in-line updates through a reseeding procedure (soon to be on Stripe)

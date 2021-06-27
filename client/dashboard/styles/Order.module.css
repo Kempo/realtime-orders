@@ -1,5 +1,6 @@
 .order {
   font-family: monospace;
+  font-size: 1.25rem;
 }
 
 .order hr {
@@ -9,8 +10,18 @@
   border-color: #CCC;
 }
 
-.order ul li p {
-  font-size: 2.5em;
+.order ul li {
+  font-size: 1.75em;
+}
+
+.order ul .price {
+  font-size: 1.25em;
+  display: inline-block;
+  width: 100%;
+}
+
+.order ul .price p {
+  float: right;
 }
 
 .order ul {

@@ -3,12 +3,21 @@ import { useQuery, gql, NetworkStatus } from '@apollo/client'
 import Order from './Order';
 import styles from '../../styles/List.module.scss'
 
+const formatter = new Intl.NumberFormat(
+  'en-US',
+  { 
+    style: 'currency', 
+    currency: 'USD' 
+  }
+);
+
 const ORDERS = gql`
   query fetchOrders {
     orders {
       title
       id
       createdAt
+      totalPrice
       lineItems {
         id
         quantity
@@ -78,7 +87,7 @@ export default function OrdersList() {
             : 
             data.orders.map(order => 
               <li key={order.id} className={styles.card}>
-                <Order {...order} />
+                <Order {...order} totalPrice={formatter.format(order.totalPrice / 100)} />
               </li>
           )} 
         </ul>
