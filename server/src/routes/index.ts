@@ -22,8 +22,16 @@ const saveOrder = async (session: Stripe.Checkout.Session) => {
 
   const createPayload = await fulfillOrder(session.id, ctx);
 
+  let totalPrice = session.amount_total;
+
+  if(!totalPrice) {
+    console.log('Error fetching total amount from Stripe.')
+    throw new Error('Could not fetch total amount from Stripe session.');
+  }
+
   return ctx.prisma.order.create({
     data: {
+      totalPrice,
       lineItems: {
         create: createPayload
       }
