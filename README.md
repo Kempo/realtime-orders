@@ -112,10 +112,10 @@ Accept and view orders from the restaurant site and receive payments online.
 Update order statuses, order filtering, fine-grained order information, sidebar and main order focus UI, more menu selection, fast static order site
 
 - [x] Event notifications on Checkout
-- [ ] Prices in Dashboard
+- [x] Prices in Dashboard
   - [x] `totalPrice` column migration
   - [ ] Non-null migration revert
-  - [ ] Setup `totalPrice` integration on order creation
+  - [x] Setup `totalPrice` integration on order creation
 - [x] New order notification
 - [x] "Most Popular" items
 - [x] Workflow for ad-hoc database updates (eg. updating item descriptions or adding new items)
@@ -127,9 +127,9 @@ Update order statuses, order filtering, fine-grained order information, sidebar 
   - [ ] Large item orders handling status
   - [x] Item Categories Migration
   - [x] Dietary Field Migration
-  - [ ] Item descriptions
-    - [ ] Description Migration
-    - [ ] Update existing items
+  - [x] Item descriptions
+    - [x] Description Migration
+    - [x] Update existing items
 - [x] Update Prisma
 - [x] Ad-hoc scripts re-organize
 - [ ] Email Receipt
