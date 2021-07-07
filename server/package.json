@@ -8,7 +8,7 @@
     "prod": "ts-node ./src/index.ts",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset",
-    "db:seed": "prisma db seed",
+    "db:seed": "prisma db seed --preview-feature",
     "studio": "prisma studio",
     "script": "ts-node ad-hoc.ts",
     "test": "jest"
