@@ -188,6 +188,7 @@ export async function getStaticProps(context) {
             unitPrice
             category
             dietary
+            description
           }
         }
       `

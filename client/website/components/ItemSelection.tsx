@@ -7,7 +7,7 @@ function formatUnitPrice(unitPrice) {
   return formatter.format(unitPrice / 100);
 }
 
-export default function ItemSelection({ id, title, unitPrice, dietary, onQuantityUpdate, isStarred }) {
+export default function ItemSelection({ id, title, unitPrice, dietary, onQuantityUpdate, description, isStarred }) {
 
   const inputEl: MutableRefObject<HTMLInputElement> = useRef(null);
 
@@ -39,8 +39,11 @@ export default function ItemSelection({ id, title, unitPrice, dietary, onQuantit
         <h4>{title} {dietary.length > 0 && <VegetarianIcon />} {isStarred && `⭐`}</h4>
         <p className={styles.price}>{formatUnitPrice(unitPrice)}</p>
       </div>
-      <p>Quantity:</p>
+      <div className={styles.description}>
+        <p>{description}</p>
+      </div>
       <div className={styles.selection}>
+        <p>Quantity:</p>
         <button onClick={handleDecreaseQuantity}>-</button>
         <input ref={inputEl} className={styles.quantityInput} type="number" id={`${id}-quantity`} min={0} max={10} step={1} defaultValue={0} onChange={onQuantityUpdate(id)} />
         <button onClick={handleIncreaseQuantity}>+</button>
