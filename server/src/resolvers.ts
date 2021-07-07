@@ -71,19 +71,11 @@ export const resolvers = {
   },
   Order: {
     lineItems: async (order, _, context: Context, __) => {
-      if(!order) {
-        throw new ApolloError('Undefined parent!');
-      }
-
       return context.loaders['lineItems'].load(order.id);
     }
   },
   LineItem: {
     item: async (lineItem, _, context: Context, __) => {
-      if(!lineItem) {
-        throw new ApolloError('Undefined parent!');
-      }
-
       return context.loaders['item'].load(lineItem.itemId);
     }
   }
