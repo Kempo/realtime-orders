@@ -24,6 +24,7 @@ model Item {
   title    String     @unique
   unitPrice Int       @default(0)
   category String?
+  description String?
   dietary String[]
   LineItem LineItem[]
 }

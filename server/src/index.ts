@@ -29,6 +29,7 @@ const typeDefs = gql`
     title: String
     unitPrice: Int
     category: String
+    description: String
     dietary: [String]
   }
 
