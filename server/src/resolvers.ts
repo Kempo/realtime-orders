@@ -29,9 +29,15 @@ export const resolvers = {
     },
     menu: async (_, __, context: Context, ___) => {
       // TODO: pagination
+      // Ignore the seed items that have an invalid `id` (eg. the tip item).
       const menuItems = await context.prisma.item.findMany({
         orderBy: {
           id: 'asc'
+        },
+        where: {
+          id: {
+            not: -1
+          }
         }
       }).catch(err => {
         console.log(err);

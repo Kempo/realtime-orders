@@ -5,6 +5,14 @@
 
 export default [
   {
+    id: -1,
+    title: "Tip Jar",
+    unitPrice: 100,
+    category: "Ignored",
+    dietary: [],
+    description: "Thank you for supporting us. Tips go directly to Cedars of Lebanon."
+  },
+  {
     id: 1,
     title: "Falafel Sandwich",
     unitPrice: 765,

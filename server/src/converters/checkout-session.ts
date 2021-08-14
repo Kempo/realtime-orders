@@ -45,15 +45,28 @@ async function connectToPrismaItems(ctx: Context, ids: number[]): Promise<Item[]
 }
 
 function mapToStripeLineItems(items: PrismaItemWithQuantity[]): Stripe.Checkout.SessionCreateParams.LineItem[]  {
-  return items.map(item => ({
+
+  return items.map(item => {
+    let unit_amount = item.unitPrice;
+    let quantity = item.quantity;
+
+    // Specifically for tips where the quantity is used as the price of the tip.
+    if(item.id === -1) {
+      // Convert the single digit quantity to a "unit price"
+      unit_amount = item.quantity * 100;
+      quantity = 1;
+    }
+
+    return {
       price_data: {
         currency: 'USD',
         product_data: {
           name: item.title,
           images: ['https://www.recipetineats.com/wp-content/uploads/2018/01/Lamb-Shawarma-Wrap.jpg'],
         },
-        unit_amount: item.unitPrice,
+        unit_amount: unit_amount,
       },
-      quantity: item.quantity
-  }))
+      quantity: quantity
+    }
+  })
 }
