@@ -6,6 +6,7 @@ import client from '../lib/apolloClient'
 import { handleEvent } from '../lib/gtag'
 import styles from '../styles/Menu.module.scss'
 import ItemSelection from '../components/ItemSelection'
+import { TipSelection } from '../components/TipSelection'
 
 // TODO: load Stripe via library?
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_TEST_STRIPE_KEY);
@@ -35,6 +36,17 @@ const CREATE_CHECKOUT_MUTATION = gql`
   }
 `;
 
+const canOrder = () => {
+  const date = new Date();
+
+  return date.getDay() !== 0;
+}
+
+const tipItem = {
+  id: -1,
+
+}
+
 export default function Menu(props) {
 
   const [cart, updateCart] = useState<LineItem[]>([]);
@@ -52,7 +64,7 @@ export default function Menu(props) {
     // TODO: refactor out into singleton
     const stripe = await stripePromise;
 
-    if(cart.length > 0) {
+    if(cart.length > 0 && canOrder) {
       const response = await createCheckoutSession({
         variables: {
           lineItems: cart
@@ -79,7 +91,7 @@ export default function Menu(props) {
         }
       }
     }else{
-      alert('Please select a dish to order from the menu!');
+      alert("Error: Please check your order and that Cedars of Lebanon is open at this time.");
     }
   }
 
@@ -167,7 +179,14 @@ export default function Menu(props) {
                   </ul>
                 </div>
               ))
-              }
+            }
+            <div id="tip">
+                <h1 className={styles.categoryTitle}>Miscellaneous</h1>
+                <hr />
+                <div className={styles.listItem}>
+                  <TipSelection id={tipItem.id} onQuantityUpdate={handleQuantityUpdate} />
+                </div>
+            </div>
         </div>
         <button onClick={handleClick}>
           Checkout
