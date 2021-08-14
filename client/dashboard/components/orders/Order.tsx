@@ -26,7 +26,7 @@ export default function Order({ id, title, lineItems, totalPrice, createdAt }) {
   )
 }
 
-function LineItem(lineItem) {
+function LineItem({ lineItem }) {
   return (
     <li key={lineItem.id}>
         <p><b>{lineItem.id === -1 ? "$" : ""}{lineItem.quantity}</b> {lineItem.item.title}</p>
