@@ -91,6 +91,7 @@ export default function Menu(props) {
         }
       }
     }else{
+      // TODO: Update this. 
       alert("Error: Please check your order and that Cedars of Lebanon is open at this time.");
     }
   }
