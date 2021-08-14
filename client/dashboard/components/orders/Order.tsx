@@ -13,7 +13,7 @@ export default function Order({ id, title, lineItems, totalPrice, createdAt }) {
       <br />
       <br />
       <ul>
-        {lineItems.map(lineItem => <li key={lineItem.id}><p><b>{lineItem.quantity}</b> {lineItem.item.title}</p></li>)}
+        {lineItems.map(lineItem => <LineItem lineItem={lineItem} />)}
         <li className={styles.price}>
           <p>{totalPrice}</p>
         </li>
@@ -23,5 +23,13 @@ export default function Order({ id, title, lineItems, totalPrice, createdAt }) {
         AUTHORIZED
       </p>
     </div>
+  )
+}
+
+function LineItem(lineItem) {
+  return (
+    <li key={lineItem.id}>
+        <p><b>{lineItem.id === -1 ? "$" : ""}{lineItem.quantity}</b> {lineItem.item.title}</p>
+    </li>
   )
 }
