@@ -64,7 +64,7 @@ export default function Menu(props) {
     // TODO: refactor out into singleton
     const stripe = await stripePromise;
 
-    if(cart.length > 0 && canOrder) {
+    if(cart.length > 0 && canOrder()) {
       const response = await createCheckoutSession({
         variables: {
           lineItems: cart
