@@ -38,8 +38,11 @@ const CREATE_CHECKOUT_MUTATION = gql`
 
 const canOrder = () => {
   const date = new Date();
+  const restrictedRanges = [[new Date("12-22-2021"), new Date("1-03-2022")], [new Date("11-25-2021"), new Date("11-25-2021")]];
 
-  return date.getDay() !== 0;
+  const withinRestrictions = restrictedRanges.some(([start, end]) => date <= end && date >= start);
+
+  return !withinRestrictions && date.getDay() !== 0; // skip out on Sundays
 }
 
 const tipItem = {
@@ -142,6 +145,7 @@ export default function Menu(props) {
           </div>
           <br />
           <p>Estimated Time: <b>15 minutes</b></p>
+          <p style={{ color: "red" }}><b>Owner's note: We will closed 11/25 and 12/22 to 1/3.</b></p>
         </div>
         <div className={styles.sectionNavigation}>
           {
