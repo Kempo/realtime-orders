@@ -33,7 +33,7 @@ export default function Home() {
         <div className={styles.logo}>
           <Image src="/main.svg" alt="Cedars of Lebanon Logo" width="490" height="320" />
         </div>
-        <p style={{ color: "red" }}><b>Owner's note: We will closed 11/25 and 12/22 to 1/3.</b></p>
+        <p style={{ color: "red" }}><b>Owner's note: We will closed 11/25 and 12/20 to 1/3.</b></p>
         <h2 className={styles.description}>Serving the best gyros, shawarmas, and falafels since 1976.</h2>
         <Link href="/menu">
           <a>
