@@ -145,7 +145,7 @@ export default function Menu(props) {
           </div>
           <br />
           <p>Estimated Time: <b>15 minutes</b></p>
-          <p style={{ color: "red" }}><b>Owner's note: We will closed 11/25 and 12/20 to 1/3.</b></p>
+          <p style={{ color: "red" }}><b>Owner's note: We will closed 11/25 and 12/20 to 1/6.</b></p>
         </div>
         <div className={styles.sectionNavigation}>
           {
