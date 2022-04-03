@@ -85,7 +85,7 @@ export default function OrdersList() {
           {data && data.orders.length == 0 ? 
             <p className={styles.noOrders}>No orders.</p> 
             : 
-            data.orders.map(order => 
+            data.orders.slice(0, 100).map(order => 
               <li key={order.id} className={styles.card}>
                 <Order {...order} totalPrice={formatter.format(order.totalPrice / 100)} />
               </li>
