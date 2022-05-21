@@ -29,8 +29,15 @@ const saveOrder = async (session: Stripe.Checkout.Session) => {
     throw new Error('Could not fetch total amount from Stripe session.');
   }
 
+  if (!session.customer) {
+    throw new Error('Could not fetch customer name associated with the Stripe session');
+  }
+
+  const customer = await stripe.customers.retrieve(session.customer as string);
+
   return ctx.prisma.order.create({
     data: {
+      title: customer['name'],
       totalPrice,
       lineItems: {
         create: createPayload
@@ -56,7 +63,7 @@ routes.post('/v1/payment/complete', express.raw({ type: 'application/json' }), a
 
   try {
     event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
-  } catch (err) {
+  } catch (err: any) {
     console.log(err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
