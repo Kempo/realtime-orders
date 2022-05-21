@@ -15,6 +15,7 @@ Stack: Node.js, Typescript, Apollo Server, Postgresql, Prisma, Express
 
 ## Deployment
 1. Server is deployed on Heroku using the [Heroku Monorepo buildpack](https://github.com/lstoll/heroku-buildpack-monorepo) with a Postgres database attached.
+- Deploy the server to production using: `git push heroku master`
 2. Both dashboard and main customer website are deployed on Vercel using sub-directories.
 
 ## Running locally
