@@ -28,8 +28,9 @@
   list-style-type: none;
 }
 
-.orderNumber {
-  color: rgb(135, 135, 135);
+.orderTitle {
+  font-weight: bold;
+  font-size: 1.75em;
 }
 
 .timestamp {

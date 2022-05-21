@@ -9,7 +9,9 @@ export default function Order({ id, title, lineItems, totalPrice, createdAt }) {
         <p className={styles.date}>{formatDate(createdAt).toLocaleDateString('en-US')}</p>
         <p className={styles.time}>{formatDate(createdAt).toLocaleTimeString('en-US')}</p>
       </div>
-      {/*<p className={styles.orderNumber}>#{`${id}`.padStart(3, '0')} {title && `(${title})`}</p>*/}
+      {
+        title && <p className={styles.orderTitle}>{title}</p>
+      }
       <br />
       <br />
       <ul>
