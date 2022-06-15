@@ -3,6 +3,8 @@
 // category: "Sandwiches", "Salads", "Sides", "Beverages", "Desert", "Specials"
 // dietary: "Vegetarian", "Vegan", ""
 
+import { SIDES } from './constants';
+
 export default [
   {
     id: -1,
@@ -243,5 +245,13 @@ export default [
     category: "Specials",
     dietary: [],
     description: "Baklava with Turkish-style highly caffeinated coffee."
+  },
+  {
+    id: 30,
+    title: "French Fries",
+    unitPrice: 395,
+    category: SIDES,
+    dietary: [],
+    description: "Crispy, well-seasoned french fries."
   }
 ];
