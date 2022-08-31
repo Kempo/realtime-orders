@@ -5,7 +5,9 @@ const prisma = new PrismaClient();
 
 async function seed() {
   menuItems.forEach(async (item) => {
-    await prisma.item.upsert({
+    console.log(item);
+
+    const t = await prisma.item.upsert({
       where: {
         id: item.id
       },
@@ -14,6 +16,8 @@ async function seed() {
     }).catch(err => {
       console.log(err);
     });
+
+    console.log(t);
   });
 
   console.log('Seeding finished!');
@@ -27,4 +31,4 @@ seed()
   })
   .finally(async () => {
     await prisma.$disconnect()
-  })
+  });
