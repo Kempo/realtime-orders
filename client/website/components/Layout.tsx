@@ -53,7 +53,7 @@ export default function Layout({ children }) {
           </Link>
           <ul>
             <li onClick={() => handleNavigation('Menu PDF', 'navigate_menu')}>
-              <a target="_blank" rel="noopener noreferrer" href="https://d7xe6a0v1wpai.cloudfront.net/TAKEOUT_MENU_REVISED_APR_9TH_2021.pdf">
+              <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1bMC-ugNmb8UzdNTVR5H6CLTn8Ggnruuo/view?usp=sharing">
                 Menu
               </a>
             </li>

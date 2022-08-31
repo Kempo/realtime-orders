@@ -26,7 +26,6 @@ interface MenuItemType {
   amountTotal: number;
 }
 
-// The individual order receipt page
 export default function Order() {
   const [status, setStatus] = useState({
     lineItems: [],
