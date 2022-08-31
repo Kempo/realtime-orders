@@ -17,7 +17,7 @@ export default [
   {
     id: 1,
     title: "Falafel Sandwich",
-    unitPrice: 765,
+    unitPrice: 795,
     category: "Sandwiches",
     dietary: ["Vegetarian"],
     description: "Our special homemade falafels wrapped in pita bread with tahini sauce, vegetables, and garnish."
@@ -25,7 +25,7 @@ export default [
   {
     id: 2,
     title: "Hummus Sandwich",
-    unitPrice: 655,
+    unitPrice: 695,
     category: "Sandwiches",
     dietary: ["Vegetarian"],
     description: "Homemade hummus wrapped in pita bread with lettuce, tomatoes, onions, sliced cucumber, and tahini sauce."
@@ -33,7 +33,7 @@ export default [
   {
     id: 3,
     title: "Baba Ghanooj Sandwich",
-    unitPrice: 655,
+    unitPrice: 695,
     category: "Sandwiches",
     dietary: ["Vegetarian"],
     description: "Lebanese pureed eggplant wrapped with vegetables in pita bread with tahini sauce and garnish."
@@ -41,7 +41,7 @@ export default [
   {
     id: 4,
     title: "Foul Mudammas Sandwich",
-    unitPrice: 715,
+    unitPrice: 750,
     category: "Sandwiches",
     dietary: ["Vegetarian"],
     description: "Lightly ground fava beans with lettuce, tomatoes, onions, and tahini sauce wrapped in pita bread."
@@ -49,7 +49,7 @@ export default [
   {
     id: 5,
     title: "Lentil & Rice Sandwich",
-    unitPrice: 715,
+    unitPrice: 750,
     category: "Sandwiches",
     dietary: ["Vegetarian"],
     description: "Lentil beans mixed with rice wrapped in pita bread with lettuce, tomatoes, onions and tahini sauce."
@@ -57,7 +57,7 @@ export default [
   {
     id: 6,
     title: "Sauteed Vegetables Sandwich",
-    unitPrice: 715,
+    unitPrice: 750,
     category: "Sandwiches",
     dietary: ["Vegetarian"],
     description: "Seasoned assorted vegetables, garlic, and herbs wrapped in pita bread with tahini sauce."
@@ -65,7 +65,7 @@ export default [
   {
     id: 7,
     title: "Shish Kebob (Lamb) Sandwich",
-    unitPrice: 875,
+    unitPrice: 895,
     category: "Sandwiches",
     dietary: [],
     description: "Large, chunks of seasoned lamb meat wrapped in pita bread with vegetables, onions, and tahini sauce."
@@ -73,7 +73,7 @@ export default [
   {
     id: 8,
     title: "Marinated Chicken Sandwich",
-    unitPrice: 765,
+    unitPrice: 795,
     category: "Sandwiches",
     dietary: [],
     description: "Chicken marinated with garlic, lemon juice, and house spices wrapped in pita bread with vegetables and tahini sauce."
@@ -81,7 +81,7 @@ export default [
   {
     id: 9,
     title: "Kafta Kebob (Beef) Sandwich",
-    unitPrice: 765,
+    unitPrice: 795,
     category: "Sandwiches",
     dietary: [],
     description: "Seasoned ground beef mixed with onion and spices wrapped in pita bread with lettuce, tomatoes, onions and tahini sauce."
@@ -89,7 +89,7 @@ export default [
   {
     id: 10,
     title: "Beef Shawarma",
-    unitPrice: 765,
+    unitPrice: 795,
     category: "Sandwiches",
     dietary: [],
     description: "Marinated, sliced beef wrapped in pita bread with fresh lettuce, tomatoes, onions, tahini sauce."
@@ -97,7 +97,7 @@ export default [
   {
     id: 11,
     title: "Beef and Lamb Gyro",
-    unitPrice: 765,
+    unitPrice: 795,
     category: "Sandwiches",
     dietary: [],
     description: "Tender, juicy gyro meat wrapped in pita bread with fresh lettuce, tomatoes, onions, tzaziki sauce, and our house special sauce."
@@ -105,7 +105,7 @@ export default [
   {
     id: 12,
     title: "Roasted Chicken Sandwich",
-    unitPrice: 767,
+    unitPrice: 799,
     category: "Sandwiches",
     dietary: [],
     description: "Roasted, juicy chicken with lettuce, tomatoes, onions, and tahini sauce in pita bread."
@@ -121,7 +121,7 @@ export default [
   {
     id: 14,
     title: "Beef Kibbey Sandwich",
-    unitPrice: 765,
+    unitPrice: 795,
     category: "Sandwiches",
     dietary: [],
     description: "A Lebanese classic consisting of baked, seasoned ground beef mixed with wheat barley wrapped in pita bread with tahini sauce and vegetables."
@@ -129,7 +129,7 @@ export default [
   {
     id: 15,
     title: "Lamb Shawarma",
-    unitPrice: 875,
+    unitPrice: 895,
     category: "Sandwiches",
     dietary: [],
     description: "Delicious, seasoned lamb cuts wrapped in pita bread with lettuce, tomatoes, onions, tahini sauce and parsley."
@@ -177,7 +177,7 @@ export default [
   {
     id: 21,
     title: "Fattoush Salad",
-    unitPrice: 715,
+    unitPrice: 795,
     category: "Sides",
     dietary: ["Vegetarian"],
     description: "Fresh, crisp vegetables with special herbs and seasoning, oil and vinegar, topped with toasted breadcrumbs."
@@ -185,7 +185,7 @@ export default [
   {
     id: 22,
     title: "Tabouli Salad",
-    unitPrice: 770,
+    unitPrice: 800,
     category: "Sides",
     dietary: ["Vegetarian"],
     description: "A famous Lebanese dish consisting of finely chopped parsley, tomatoes, onions, and special dressing."
@@ -193,7 +193,7 @@ export default [
   {
     id: 23,
     title: "Rice & Pocket Bread",
-    unitPrice: 545,
+    unitPrice: 595,
     category: "Sides",
     dietary: [],
     description: "White rice and pita bread."
@@ -201,7 +201,7 @@ export default [
   {
     id: 24,
     title: "Soda",
-    unitPrice: 248,
+    unitPrice: 275,
     category: "Beverages",
     dietary: [],
     description: "Choose your soda from our selection at the counter."
@@ -209,7 +209,7 @@ export default [
   {
     id: 25,
     title: "Cedar's Lemonade",
-    unitPrice: 385,
+    unitPrice: 395,
     category: "Beverages",
     dietary: [],
     description: "Our house lemonade."
@@ -217,7 +217,7 @@ export default [
   {
     id: 26,
     title: "Tea",
-    unitPrice: 248,
+    unitPrice: 275,
     category: "Beverages",
     dietary: [],
     description: "Choose your tea from our selection at the counter."
@@ -225,7 +225,7 @@ export default [
   {
     id: 27,
     title: "Cedar's Iced Tea",
-    unitPrice: 275,
+    unitPrice: 350,
     category: "Beverages",
     dietary: [],
     description: "Our house iced tea."
@@ -241,7 +241,7 @@ export default [
   {
     id: 29,
     title: "Baklava & Turkish Coffee",
-    unitPrice: 633,
+    unitPrice: 675,
     category: "Specials",
     dietary: [],
     description: "Baklava with Turkish-style highly caffeinated coffee."
