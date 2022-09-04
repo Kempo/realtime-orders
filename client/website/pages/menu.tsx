@@ -7,6 +7,7 @@ import { handleEvent } from '../lib/gtag'
 import styles from '../styles/Menu.module.scss'
 import ItemSelection from '../components/ItemSelection'
 import { TipSelection } from '../components/TipSelection'
+import { DateTime } from 'luxon'
 
 // TODO: load Stripe via library?
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_TEST_STRIPE_KEY);
@@ -36,13 +37,19 @@ const CREATE_CHECKOUT_MUTATION = gql`
   }
 `;
 
+// Create dates assuming default time zone is UST
+const restrictedRanges = [
+  [DateTime.fromISO("09-05-202T00:00:00").setZone('America/Los_Angeles'), DateTime.fromISO("09-06-202T00:00:00").setZone('America/Los_Angeles')]
+];
+
 const canOrder = () => {
-  const date = new Date();
-  const restrictedRanges = [[new Date("12-20-2021"), new Date("1-03-2022")], [new Date("11-25-2021"), new Date("11-25-2021")]];
+  const now = DateTime.now().setZone('America/Los_Angeles')
 
-  const withinRestrictions = restrictedRanges.some(([start, end]) => date <= end && date >= start);
+  const withinRestrictions = restrictedRanges.some(([start, end]) => { 
+    return now <= end && now >= start;
+  });
 
-  return !withinRestrictions && date.getDay() !== 0; // skip out on Sundays
+  return !withinRestrictions && now.weekday !== 7;
 }
 
 const tipItem = {
