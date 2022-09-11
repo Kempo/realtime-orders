@@ -49,6 +49,12 @@ const canOrder = () => {
     return now <= end && now >= start;
   });
 
+  const withinHours = now.hour >= 11 && now.hour <= 20;
+
+  if (!withinHours) { 
+    return false;
+  }
+
   return !withinRestrictions && now.weekday !== 7;
 }
 
