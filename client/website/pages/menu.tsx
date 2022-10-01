@@ -39,8 +39,8 @@ const CREATE_CHECKOUT_MUTATION = gql`
 
 // Create dates assuming default time zone is UST
 const restrictedRanges = [
-  [DateTime.fromISO("09-05-202T00:00:00").setZone('America/Los_Angeles'), DateTime.fromISO("09-06-202T00:00:00").setZone('America/Los_Angeles')],
-  [DateTime.fromISO("09-28-202T00:00:00").setZone('America/Los_Angeles'), DateTime.fromISO("10-02-202T00:00:00").setZone('America/Los_Angeles')]
+  [DateTime.fromISO("2022-09-05T00:00:00Z", { zone: 'America/Los_Angeles' }), DateTime.fromISO("2022-09-07T00:00:00Z", { zone: 'America/Los_Angeles' })],
+  [DateTime.fromISO("2022-09-30T00:00:00Z", { zone: 'America/Los_Angeles' }), DateTime.fromISO("2022-10-03T00:00:00Z", { zone: 'America/Los_Angeles' })]
 ];
 
 const canOrder = () => {
