@@ -41,7 +41,7 @@ const CREATE_CHECKOUT_MUTATION = gql`
 const restrictedRanges = [
   [DateTime.fromISO("2022-09-05T00:00:00Z", { zone: 'America/Los_Angeles' }), DateTime.fromISO("2022-09-07T00:00:00Z", { zone: 'America/Los_Angeles' })],
   [DateTime.fromISO("2022-09-30T00:00:00Z", { zone: 'America/Los_Angeles' }), DateTime.fromISO("2022-10-03T00:00:00Z", { zone: 'America/Los_Angeles' })],
-  [DateTime.fromISO("2022-11-24T00:00:00Z", { zone: 'America/Los_Angeles' }), DateTime.fromISO("2022-11-25T00:00:00Z", { zone: 'America/Los_Angeles' })]
+  [DateTime.fromISO("2022-11-24T00:00:00Z", { zone: 'America/Los_Angeles' }), DateTime.fromISO("2022-11-27T00:00:00Z", { zone: 'America/Los_Angeles' })]
 
 ];
 
