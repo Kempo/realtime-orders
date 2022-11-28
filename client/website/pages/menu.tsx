@@ -162,7 +162,7 @@ export default function Menu(props) {
             <span className={styles.badge}>Pickup Only</span>
           </div>
           <br />
-          <p>Estimated Time: <b>15 minutes</b></p>
+          <p>Estimated Time: <b>Sorry! Online orders are currently unavailable. Please call at (206) 632-7708.</b></p>
         </div>
         <div className={styles.sectionNavigation}>
           {
