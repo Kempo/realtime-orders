@@ -81,36 +81,38 @@ export default function Menu(props) {
     // TODO: refactor out into singleton
     const stripe = await stripePromise;
 
-    if(cart.length > 0 && canOrder()) {
-      const response = await createCheckoutSession({
-        variables: {
-          lineItems: cart
-        }
-      }).catch(err => {
-        console.log(err);
+    alert("Sorry! Online ordering is temporarily unavailable. Please call Cedars of Lebanon to order: (206) 632-7708");
 
-        return {
-          data: null
-        }
-      });
+    // if(cart.length > 0 && canOrder()) {
+    //   const response = await createCheckoutSession({
+    //     variables: {
+    //       lineItems: cart
+    //     }
+    //   }).catch(err => {
+    //     console.log(err);
 
-      if(response.data) {
-        // When the customer clicks on the button, redirect them to Checkout.
-        const result = await stripe.redirectToCheckout({
-          sessionId: response.data.createCheckoutSession.sessionId
-        });
+    //     return {
+    //       data: null
+    //     }
+    //   });
+
+    //   if(response.data) {
+    //     // When the customer clicks on the button, redirect them to Checkout.
+    //     const result = await stripe.redirectToCheckout({
+    //       sessionId: response.data.createCheckoutSession.sessionId
+    //     });
     
-        if (result.error) {
-          console.log(result.error.message);
-          // If `redirectToCheckout` fails due to a browser or network
-          // error, display the localized error message to your customer
-          // using `result.error.message`.
-        }
-      }
-    }else{
-      // TODO: Update this. 
-      alert("Error: Please check your order and that Cedars of Lebanon is open at this time.");
-    }
+    //     if (result.error) {
+    //       console.log(result.error.message);
+    //       // If `redirectToCheckout` fails due to a browser or network
+    //       // error, display the localized error message to your customer
+    //       // using `result.error.message`.
+    //     }
+    //   }
+    // }else{
+    //   // TODO: Update this. 
+    //   alert("Error: Please check your order and that Cedars of Lebanon is open at this time.");
+    // }
   }
 
   function handleQuantityUpdate(itemId) {
