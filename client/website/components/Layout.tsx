@@ -5,6 +5,7 @@ import hours from "../lib/restaurantDetails.json";
 import Contact from "../components/Contact";
 import { handleEvent } from "../lib/gtag";
 import styles from "../styles/Layout.module.scss";
+import treeSvg from "../public/tree.svg";
 
 export default function Layout({ children }) {
   function handleNavigation(page, action) {
@@ -58,14 +59,12 @@ export default function Layout({ children }) {
         </div>
         <div className={styles.nav}>
           <Link href="/">
-            <a className={styles.home}>
-              <Image
-                src="/tree.svg"
-                alt="Cedars of Lebanon Tree"
-                width={64}
-                height={64}
-              />
-            </a>
+            <Image
+              src={treeSvg}
+              alt="Cedars of Lebanon Tree"
+              width={64}
+              height={64}
+            />
           </Link>
           <ul>
             <li onClick={() => handleNavigation("Menu PDF", "navigate_menu")}>
@@ -85,9 +84,7 @@ export default function Layout({ children }) {
               </Link>
             </li>  */}
             <li onClick={() => handleNavigation("Contact", "navigate_contact")}>
-              <Link href="/#contact">
-                <a>Contact</a>
-              </Link>
+              <Link href="/#contact">Contact</Link>
             </li>
           </ul>
         </div>
