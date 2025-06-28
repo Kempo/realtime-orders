@@ -1,16 +1,15 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
-import hours from '../lib/restaurantDetails.json';
-import Contact from '../components/Contact';
-import { handleEvent } from '../lib/gtag';
-import styles from '../styles/Layout.module.scss';
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
+import hours from "../lib/restaurantDetails.json";
+import Contact from "../components/Contact";
+import { handleEvent } from "../lib/gtag";
+import styles from "../styles/Layout.module.scss";
 
 export default function Layout({ children }) {
-
   function handleNavigation(page, action) {
     handleEvent({
-      category: 'navigation',
+      category: "navigation",
       action,
       label: page,
     });
@@ -22,13 +21,28 @@ export default function Layout({ children }) {
         <title>Cedars of Lebanon | Seattle's Best Gyro and Falafels</title>
         <meta charSet="utf-8" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://cedarsoflebanonuw.com/takeout.jpeg" />
+        <meta
+          property="og:image"
+          content="https://cedarsoflebanonuw.com/takeout.jpeg"
+        />
         <meta property="og:url" content="https://cedarsoflebanonuw.com/" />
-        <meta property="og:title" content="Cedars of Lebanon | Seattle's Best Gyro and Falafels" />
-        <meta property="og:description" content="Cedars of Lebanon serves the best gyros, falafels, and shawarmas in UW. We are family-run since 1976 and do takeout and dine-in everyday except Sunday." />
-        <meta name="description" content="Cedars of Lebanon serves the best gyros, falafels, and shawarmas in UW. We are family-run since 1976 and do takeout and dine-in everyday except Sunday." />
+        <meta
+          property="og:title"
+          content="Cedars of Lebanon | Seattle's Best Gyro and Falafels"
+        />
+        <meta
+          property="og:description"
+          content="Cedars of Lebanon serves the best gyros, falafels, and shawarmas in UW. We are family-run since 1976 and do takeout and dine-in everyday except Sunday."
+        />
+        <meta
+          name="description"
+          content="Cedars of Lebanon serves the best gyros, falafels, and shawarmas in UW. We are family-run since 1976 and do takeout and dine-in everyday except Sunday."
+        />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="keywords" content="gyros uw, best gyros uw, falafels uw, lebanese food" />
+        <meta
+          name="keywords"
+          content="gyros uw, best gyros uw, falafels uw, lebanese food"
+        />
         <meta name="author" content="Aaron Chen" />
         <link rel="icon" href="/favicon.png" />
       </Head>
@@ -36,7 +50,9 @@ export default function Layout({ children }) {
         <div className={styles.notice}>
           <p>TAKEOUT & DINE-IN</p>
           <span className={styles.separator} />
-          <p>{hours.openTime} - {hours.closeTime} DAILY</p>
+          <p>
+            {hours.openTime} - {hours.closeTime} DAILY
+          </p>
           <span className={styles.separator} />
           <p>CLOSED SUNDAY</p>
         </div>
@@ -52,37 +68,37 @@ export default function Layout({ children }) {
             </a>
           </Link>
           <ul>
-            <li onClick={() => handleNavigation('Menu PDF', 'navigate_menu')}>
-              <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1dFmksG6MHKWmj5HfY1jxENJRBlAQwS4H/view?usp=sharing">
+            <li onClick={() => handleNavigation("Menu PDF", "navigate_menu")}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://drive.google.com/file/d/1TEhUzVakh9baHxuOpvI_Bw6Owr4srOQ4/view?usp=sharing"
+              >
                 Menu
               </a>
             </li>
-            <li onClick={() => handleNavigation('Online Orders', 'navigate_orders')}>
+            {/* <li onClick={() => handleNavigation('Online Orders', 'navigate_orders')}>
               <Link href="/menu">
                 <a>
                   Order
                 </a>
               </Link>
-            </li> 
-            <li onClick={() => handleNavigation('Contact', 'navigate_contact')}>
+            </li>  */}
+            <li onClick={() => handleNavigation("Contact", "navigate_contact")}>
               <Link href="/#contact">
-                <a>
-                  Contact
-                </a>
+                <a>Contact</a>
               </Link>
-            </li>    
+            </li>
           </ul>
         </div>
       </header>
       <main>
-        <div className={styles.main}>
-          {children}
-        </div>
+        <div className={styles.main}>{children}</div>
       </main>
       <footer>
         <h1>Cedars of Lebanon</h1>
         <Contact />
       </footer>
     </div>
-  )
+  );
 }
