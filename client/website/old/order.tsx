@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 // import { gql } from '@apollo/client';
 import styles from "../styles/Order.module.scss";
-import client from "../lib/apolloClient";
 import formatter from "../lib/dollarFormatter";
 
 // const FETCH_ORDER_DETAILS = gql`
