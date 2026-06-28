@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CdnImage from "./CdnImage";
 import Contact from "../components/Contact";
 import styles from "../styles/Home.module.scss";
 import mainSvg from "../public/main.svg";
@@ -6,7 +7,6 @@ import chickenAndBreakfastGyros from "../public/images/chicken-&-breakfast-gyros
 import gyroSalad1 from "../public/images/gyro-salad-1.jpeg";
 import gyroSalad2 from "../public/images/gyro-salad.jpeg";
 import gyroPlate from "../public/images/gyro-plate.jpeg";
-import cloudfrontLoader from "../loader";
 
 const images = [
   {
@@ -70,10 +70,9 @@ export default function Home() {
         <Contact />
       </div>
       <div className={styles.store}>
-        <Image
+        <CdnImage
           src="restaurant.jpeg"
           alt="Cedars of Lebanon Restaurant View"
-          loader={cloudfrontLoader}
           width="901"
           height="591"
         />
@@ -87,13 +86,12 @@ export default function Home() {
           take pride in providing affordable, delicious, and fresh food to you.
           <br />
           <br />
-          Come stop by and say hello! We'd love to see you.
+          Come stop by and say hello! We&apos;d love to see you.
         </p>
       </div>
       <div className={styles.takeout}>
-        <Image
+        <CdnImage
           src="takeout.jpeg"
-          loader={cloudfrontLoader}
           alt="Cedars of Lebanon Takeout Window"
           width="801"
           height="534"

@@ -14,11 +14,11 @@ Scope is limited to `client/website`. `client/dashboard` and `server` are untouc
 
 ## Progress
 
-- [ ] Milestone 1 — Toolchain pinned: `.nvmrc` set to Node 24, single package manager (npm).
-- [ ] Milestone 2 — Dependencies upgraded: Next 16, React 19, TS 6, refreshed `@types/*`, unused deps removed.
-- [ ] Milestone 3 — App Router migration: `app/layout.tsx` + `app/page.tsx` replace `pages/`, GA wired via `@next/third-parties`, interactive components marked `"use client"`.
-- [ ] Milestone 4 — Config modernized: `tsconfig.json` target/moduleResolution updated, `next.config.js` reviewed, boilerplate removed.
-- [ ] Milestone 5 — Verified: `npm run build` passes and `npm run dev` renders the page with all features working.
+- [x] (2026-06-27) Milestone 1 — Toolchain pinned: `.nvmrc` set to `24`, `yarn.lock` deleted (npm only).
+- [x] (2026-06-27) Milestone 2 — Dependencies upgraded: Next 16.2.9, React 19.2.7, TS 6.0.3, `@types/node@24`, `@types/react@19`, `@types/react-dom@19` added, `@next/third-parties` added; removed `graphql`, `@stripe/stripe-js`, `luxon`, `@types/luxon`; added `engines.node >= 24`; `package-lock.json` regenerated.
+- [x] (2026-06-27) Milestone 3 — App Router migration: `app/layout.tsx`, `app/page.tsx`, `app/Header.tsx` (`"use client"`), `app/WebVitals.tsx` (`"use client"`), `app/CdnImage.tsx` (`"use client"`) created; GA via `@next/third-parties` `GoogleAnalytics`; `pages/` deleted; dead `Layout.tsx`/`ItemSelection.tsx`/`TipSelection.tsx` moved to `old/`.
+- [x] (2026-06-27) Milestone 4 — Config modernized: `tsconfig.json` `target: ES2017`, `moduleResolution: bundler`, `old/` excluded from type-check; Next auto-set `jsx: react-jsx`. `next.config.js` left as-is (custom loader bypasses domain allowlist).
+- [x] (2026-06-27) Milestone 5 — Verified: `npm run build` clean (App Router `/`, static); `next start` on port 3007 returns 200 and renders all sections, bundled + CDN images, and `<title>`/`og` metadata.
 
 ## Surprises & Discoveries
 
@@ -26,6 +26,10 @@ Scope is limited to `client/website`. `client/dashboard` and `server` are untouc
   Evidence: `grep -rniE "stripe|graphql|gql|fetch\(|apollo" components pages` returns nothing.
 - Observation: `components/ItemSelection.tsx` and `components/TipSelection.tsx` are dead code — nothing imports or renders them (relics of a removed ordering flow). `luxon` / `@types/luxon` are also unused.
   Evidence: `grep -rn "ItemSelection\|TipSelection" pages components | grep import` shows only each file's own style import; `grep -rn luxon pages components lib` returns nothing.
+- Observation: a custom `next/image` `loader` function cannot be passed as a prop from a Server Component in the App Router (functions can't cross the server→client boundary). Resolved by isolating it in a `"use client"` wrapper, `app/CdnImage.tsx`, keeping `app/page.tsx` a Server Component.
+  Evidence: the two CDN images (`restaurant.jpeg`, `takeout.jpeg`) render via `https://d7xe6a0v1wpai.cloudfront.net/...` in the served HTML.
+- Observation: port 3000 was already occupied by another local app (redirects `/` → `/dashboard/`), so `npm run dev` failed with `EADDRINUSE`. Verified instead with `next start -p 3007` against the production build.
+  Evidence: dev log showed `EADDRINUSE :::3000`; `curl localhost:3007` returned HTTP 200 with full page content.
 
 ## Decision Log
 
@@ -53,9 +57,29 @@ Scope is limited to `client/website`. `client/dashboard` and `server` are untouc
   Rationale: Per `CLAUDE.md` "Surgical changes" these are flagged, not silently deleted. The repo already uses an `old/` folder for deprecated components (commit `e428503`). User may veto any of these individually.
   Date/Author: 2026-06-27 / aaron + Claude.
 
+- Decision: `components/Layout.tsx` (its `next/head` SEO + header/footer) is split into `app/layout.tsx` (server: HTML shell, `metadata`, footer) and `app/Header.tsx` (client: interactive nav). The now-orphaned `Layout.tsx` is moved to `old/`.
+  Rationale: The migration itself orphaned `Layout.tsx` (only `pages/_app.js` consumed it); `CLAUDE.md` says to clean up orphans your own change creates. App Router needs SEO as a `metadata` export, not `next/head`.
+  Date/Author: 2026-06-27 / aaron + Claude.
+
+- Decision: Exclude `old/` from TypeScript checking (`tsconfig.json` `exclude`).
+  Rationale: `old/` is the dead-code folder; under React 19 types its retired files could raise type errors. Excluding avoids scope-creep fixes to code that is not shipped.
+  Date/Author: 2026-06-27 / aaron + Claude.
+
+- Decision: Preserve Google Analytics web-vitals reporting via a `useReportWebVitals` + `sendGAEvent` client component (`app/WebVitals.tsx`) rather than dropping it.
+  Rationale: The old `reportWebVitals` in `pages/_app.js` reported vitals to GA; keeping behavior identical. `@next/third-parties` provides `sendGAEvent`.
+  Date/Author: 2026-06-27 / aaron + Claude.
+
 ## Outcomes & Retrospective
 
-To be completed after execution. Summarize what shipped, any gaps (e.g. deps intentionally left), and lessons learned; compare to Purpose.
+Achieved: `client/website` now runs on Next.js 16.2.9, React 19.2.7, TypeScript 6.0.3, targets Node 24 LTS (`.nvmrc`), and uses the App Router. `npm run build` is clean and the production build renders the page identically — all sections, bundled images (Next-optimized), CDN images (custom loader), and SEO metadata. Stack matches the original goal: latest Next/React, current Node, single (npm) lockfile.
+
+Gaps / follow-ups:
+- Google Analytics is wired (`GoogleAnalytics` mounts when `NEXT_PUBLIC_GA_ID` is set) but live event firing was not verified in a browser — confirm in a real deploy with the env var present.
+- `next start`/`dev` default port 3000 collides with another local app; deploy/CI should set the port explicitly or it is a non-issue in production.
+- `old/` retains retired components (`Layout.tsx`, `ItemSelection.tsx`, `TipSelection.tsx`, plus pre-existing `menu.tsx`/`order.tsx`); delete whenever desired.
+- `npm audit` reported 2 moderate advisories in the fresh tree; not addressed here (out of scope).
+
+Lessons: the only non-trivial App Router gotcha for this static site was the `next/image` custom-loader server→client boundary, solved with a small client wrapper. Everything else was a faithful file move plus metadata/GA modernization.
 
 ## Context and Orientation
 
@@ -159,7 +183,26 @@ Recommended: create the branch before starting —
 
 ## Artifacts and Notes
 
-To be filled during execution with the `npm run build` output and verification notes.
+`npm run build` (key output):
+
+    ▲ Next.js 16.2.9 (Turbopack)
+    ✓ Compiled successfully in 973ms
+      Running TypeScript ...
+      - jsx was set to react-jsx (next.js uses the React automatic runtime)
+    ✓ Generating static pages using 4 workers (3/3)
+    Route (app)
+    ┌ ○ /
+    └ ○ /_not-found
+    ○  (Static)  prerendered as static content
+
+Runtime check (`next start -p 3007`):
+
+    status: 200
+    content: "Serving the best gyros, shawarmas, and falafels since 1976.", "Try us out", "About Us", "TAKEOUT & DINE-IN"
+    CDN images: d7xe6a0v1wpai.cloudfront.net/restaurant.jpeg, d7xe6a0v1wpai.cloudfront.net/takeout.jpeg
+    title: <title>Cedars of Lebanon | Seattle's Best Gyro and Falafels</title>
+
+Installed versions: next 16.2.9, react 19.2.7, react-dom 19.2.7, typescript 6.0.3.
 
 ## Interfaces and Dependencies
 
