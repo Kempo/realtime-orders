@@ -8,7 +8,7 @@ A real-time orders dashboard for a local restaurant in Seattle.
 1. Orders Dashboard (dynamic)
 2. Customer-Facing Website (static)
 
-Stack: Next.js, Typescript, Apollo Client
+Stack: Next.js 16 (App Router), React 19, TypeScript 6, Node 24 LTS
 
 ## Server
 Stack: Node.js, Typescript, Apollo Server, Postgresql, Prisma, Express
@@ -19,14 +19,19 @@ Stack: Node.js, Typescript, Apollo Server, Postgresql, Prisma, Express
 2. Both dashboard and main customer website are deployed on Vercel using sub-directories.
 
 ## Running locally
-Navigate to the following subdirectories and run the following commands for each:
+Navigate to the relevant subdirectory and run its commands:
 
-1. Orders Dashboard / Customer Website (ports `3001` and `3000`):
+1. Customer Website — `client/website` (port `3000`). Uses npm and Node 24 (see `.nvmrc`). See `client/website/README.md` for details.
+```
+nvm use        # Node 24 (run `nvm install 24` once if needed)
+npm install    # first time only
+npm run dev    # http://localhost:3000  (use `-- -p 3005` if 3000 is taken)
+```
+2. Orders Dashboard — `client/dashboard` (port `3001`):
 ```
 yarn dev
 ```
-2. Server (on port `4000`): 
-
+3. Server — `server` (port `4000`):
 ```
 npm run dev
 ```
